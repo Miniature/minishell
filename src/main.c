@@ -6,11 +6,14 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 18:10:56 by wdavey            #+#    #+#             */
-/*   Updated: 2023/11/15 18:11:24 by wdavey           ###   ########.fr       */
+/*   Updated: 2023/11/15 18:15:32 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 int	main(int argc, char **argv, char **envp)
 {
+	(void)argc;
+	(void)argv;
+	(void)envp;
 	return (0);
 }
