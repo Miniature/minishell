@@ -9,6 +9,7 @@ export CFLAGS
 NAME:=minishell
 
 FILES:=\
+	main\
 
 BONUS:=\
 
