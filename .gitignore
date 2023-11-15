@@ -1,0 +1,10 @@
+.vscode
+*/.git
+
+#generated on build
+*.a
+obj/
+bin/
+
+#project specific
+minishell
