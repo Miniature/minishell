@@ -1,0 +1,56 @@
+GENERAL FLOW:
+get input line
+	ctrl+{D,C,\}
+split line by commands
+	', "
+	|
+	;, \ (subject says dont do them but whatever)
+	>, <, >>, <<
+		<< = heredoc
+	&&, || (bonus)
+split commands by args
+	most of above again, especially ', "
+variable susitution
+	blocked by '
+		env variables $PATH, etc
+			initial values come from envp
+			several have defaults if they are not set, eg $PATH
+		$?
+			initially 0
+	blocked by ' and "
+		~ (required for at least cd, expanding generally in path context is useful)
+			not the same as $HOME, need a different way
+		* (bonus)
+find exe location
+	if doesnt contain '/' check $PATH, otherwise prepend pwd
+		having '//' in a path is fine
+		malformed $PATH could contain "::" or otherwise end with blank path, dont crash
+run commands
+	ctrl+{C,D,|}
+	probably some other signal stuff here
+	$?
+		initially 0
+		i think theres something about not running subsequent commands depending on one failing but i cant remember
+		matters a lot for bonus
+
+BUILTINS:
+probably handle as normal commands but check if a command (ie first element of arg list) is a builtin before going for the fork stuff
+	echo
+		-n
+	cd
+		relative and absolute (ie starts with / or ~, or just / if ~ is handled during substitution step)
+	pwd
+	export
+	unset
+	env
+	exit
+
+STRUCTURE STUFF:
+command data type
+	str:full path
+	str[]:argv
+	str[]:envp (chaining cd with && complicates this, otherwise can all point to the same envp)
+	fd[]:io pipes (i dont think we need to handle &2>)
+
+OTHER:
+can build tests by piping in input files :)
