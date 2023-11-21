@@ -11,7 +11,7 @@ split line by commands
 	&&, || (bonus)
 split commands by args
 	most of above again, especially ', "
-variable susitution
+variable subsitution
 	blocked by '
 		env variables $PATH, etc
 			initial values come from envp
