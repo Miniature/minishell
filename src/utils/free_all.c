@@ -1,25 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   free_all.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/15 18:10:56 by wdavey            #+#    #+#             */
-/*   Updated: 2023/11/20 15:23:59 by wdavey           ###   ########.fr       */
+/*   Created: 2023/10/10 06:40:19 by wdavey            #+#    #+#             */
+/*   Updated: 2023/10/26 16:11:59 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <unistd.h>
+#include <stdlib.h>
 
-int	main(int argc, char **argv, char **envp)
+void	ft_free_all(char **strs)
 {
-	(void)argc;
-	(void)argv;
-	(void)envp;
-	char buf[129];
-	buf[read(0, buf, 128)] = 0;
-		printf("minshell: %s\n", buf);
-	return (0);
+	size_t	iii;
+	char	*now;
+
+	if (NULL == strs)
+		return ;
+	iii = -1;
+	while (NULL != strs[++iii])
+	{
+		now = strs[iii];
+		free(strs[iii]);
+	}
+	free(strs);
 }

@@ -1,25 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   str.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/15 18:10:56 by wdavey            #+#    #+#             */
-/*   Updated: 2023/11/20 15:23:59 by wdavey           ###   ########.fr       */
+/*   Created: 2023/09/11 15:45:23 by wdavey            #+#    #+#             */
+/*   Updated: 2023/11/21 15:10:47 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <unistd.h>
+#ifndef STR_H
+# define STR_H
 
-int	main(int argc, char **argv, char **envp)
-{
-	(void)argc;
-	(void)argv;
-	(void)envp;
-	char buf[129];
-	buf[read(0, buf, 128)] = 0;
-		printf("minshell: %s\n", buf);
-	return (0);
-}
+# include <stdbool.h>
+
+bool	str_has_any(char *str, bool(*f)(char));
+bool	str_has_any_char(char *str, char c);
+bool	str_has_all(char *str, bool(*f)(char));
+
+#endif

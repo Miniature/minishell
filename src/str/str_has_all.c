@@ -1,25 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   str_has_all.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/15 18:10:56 by wdavey            #+#    #+#             */
-/*   Updated: 2023/11/20 15:23:59 by wdavey           ###   ########.fr       */
+/*   Created: 2023/08/23 10:11:38 by wdavey            #+#    #+#             */
+/*   Updated: 2023/09/11 16:34:20 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <unistd.h>
+#include <stdbool.h>
 
-int	main(int argc, char **argv, char **envp)
+bool	str_has_all(char *str, bool(*f)(char))
 {
-	(void)argc;
-	(void)argv;
-	(void)envp;
-	char buf[129];
-	buf[read(0, buf, 128)] = 0;
-		printf("minshell: %s\n", buf);
-	return (0);
+	while (*str)
+	{
+		if (!f(*str))
+			return (false);
+		str++;
+	}
+	return (true);
 }

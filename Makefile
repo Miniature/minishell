@@ -9,6 +9,9 @@ export CFLAGS
 NAME:=minishell
 
 FILES:=\
+	string/str_has_all\
+	string/str_has_any\
+	utils/free_all\
 	main\
 
 BONUS:=\

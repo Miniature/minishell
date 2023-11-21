@@ -1,25 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   resolve_path.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/15 18:10:56 by wdavey            #+#    #+#             */
-/*   Updated: 2023/11/20 15:23:59 by wdavey           ###   ########.fr       */
+/*   Created: 2023/11/21 15:04:05 by wdavey            #+#    #+#             */
+/*   Updated: 2023/11/21 15:37:32 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include <unistd.h>
+#include "command.h"
+#include "libft.h"
+#include "str.h"
 
-int	main(int argc, char **argv, char **envp)
+char	*resolve_path(t_command cmd)
 {
-	(void)argc;
-	(void)argv;
-	(void)envp;
-	char buf[129];
-	buf[read(0, buf, 128)] = 0;
-		printf("minshell: %s\n", buf);
-	return (0);
+	char	*buf[2];
+	size_t	iii;
+
+	if ('/' == cmd.argv[0][0])
+		return (ft_strdup(cmd.argv[0]));
+	else if (str_has_any_char(cmd.argv[0], '/'))
+	{
+		buf[0] = getcwd(NULL, -1);
+		buff[1] = ft_strjoin(get
+		return (ft_strjoin(getcwd(NULL, -1), cmd.argv[0]));
+	}
 }

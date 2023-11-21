@@ -1,25 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   command.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/15 18:10:56 by wdavey            #+#    #+#             */
-/*   Updated: 2023/11/20 15:23:59 by wdavey           ###   ########.fr       */
+/*   Created: 2023/11/20 14:00:46 by wdavey            #+#    #+#             */
+/*   Updated: 2023/11/21 15:03:54 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <unistd.h>
+#ifndef COMMAND_H
+# define COMMAND_H
 
-int	main(int argc, char **argv, char **envp)
+# include <sys/types.h>
+
+enum
 {
-	(void)argc;
-	(void)argv;
-	(void)envp;
-	char buf[129];
-	buf[read(0, buf, 128)] = 0;
-		printf("minshell: %s\n", buf);
-	return (0);
-}
+	IN,
+	OUT
+};
+
+typedef struct s_command
+{
+	char	**argv;
+	char	**envp;
+	int		fd[2];
+}	t_command;
+
+//for non-builtins
+int		exec_external_command(t_command cmd);
+char	*resolve_path(t_command cmd);
+
+#endif

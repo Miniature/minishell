@@ -7,6 +7,7 @@ split line by commands
 	;, \ (subject says dont do them but whatever)
 	>, <, >>, <<
 		<< = heredoc
+		mixing <, >, |, etc gives prio to rightmost, still overwrites (with blank) for extra >
 	&&, || (bonus)
 split commands by args
 	most of above again, especially ', "
@@ -39,7 +40,9 @@ probably handle as normal commands but check if a command (ie first element of a
 		-n
 	cd
 		relative and absolute (ie starts with / or ~, or just / if ~ is handled during substitution step)
+		chdir
 	pwd
+		getcwd
 	export
 	unset
 	env
@@ -47,7 +50,6 @@ probably handle as normal commands but check if a command (ie first element of a
 
 STRUCTURE STUFF:
 command data type
-	str:full path
 	str[]:argv
 	str[]:envp (chaining cd with && complicates this, otherwise can all point to the same envp)
 	fd[]:io pipes (i dont think we need to handle &2>)

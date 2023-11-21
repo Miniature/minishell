@@ -1,25 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   str_has_any.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/15 18:10:56 by wdavey            #+#    #+#             */
-/*   Updated: 2023/11/20 15:23:59 by wdavey           ###   ########.fr       */
+/*   Created: 2023/08/23 10:11:38 by wdavey            #+#    #+#             */
+/*   Updated: 2023/11/21 15:10:33 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <unistd.h>
+#include <stdbool.h>
 
-int	main(int argc, char **argv, char **envp)
+bool	str_has_any(char *str, bool(*f)(char))
 {
-	(void)argc;
-	(void)argv;
-	(void)envp;
-	char buf[129];
-	buf[read(0, buf, 128)] = 0;
-		printf("minshell: %s\n", buf);
-	return (0);
+	while (*str)
+	{
+		if (f(*str))
+			return (true);
+		str++;
+	}
+	return (false);
+}
+
+bool	str_has_any_char(char *str, char c)
+{
+	while (*str)
+	{
+		if (*str == c)
+			return (true);
+		str++;
+	}
+	return (false);
 }
