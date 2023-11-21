@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_string_add.c                                    :+:      :+:    :+:   */
+/*   str_add.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 07:35:25 by wdavey            #+#    #+#             */
-/*   Updated: 2023/10/10 08:21:45 by wdavey           ###   ########.fr       */
+/*   Updated: 2023/11/21 16:03:01 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_string.h"
+#include "str.h"
 
 #include <stdlib.h>
-#include "libftprintf.h"
+#include "libft.h"
 
 t_string	*string_minsize(t_string *s, size_t min)
 {
