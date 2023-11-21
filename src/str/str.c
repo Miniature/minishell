@@ -6,13 +6,13 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 08:06:37 by wdavey            #+#    #+#             */
-/*   Updated: 2023/10/10 08:08:07 by wdavey           ###   ########.fr       */
+/*   Updated: 2023/11/21 15:45:57 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
-
-#include "ft_string.h"
+#include "str.h"
+#include "libft.h"
 
 t_string	string_new(void)
 {
@@ -20,6 +20,15 @@ t_string	string_new(void)
 
 	n.cstr = NULL;
 	n.size = 0;
+	return (n);
+}
+
+t_string	string_new_cstr(char *cstr)
+{
+	t_string	n;
+
+	n.cstr = cstr;
+	n.size = ft_strlen(cstr) + 1;
 	return (n);
 }
 

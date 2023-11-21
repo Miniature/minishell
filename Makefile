@@ -9,10 +9,14 @@ export CFLAGS
 NAME:=minishell
 
 FILES:=\
-	string/str_has_all\
-	string/str_has_any\
+	str/str_add\
+	str/str_has_all\
+	str/str_has_any\
+	str/str\
 	utils/free_all\
+	exec_external_command\
 	main\
+	resolve_path\
 
 BONUS:=\
 
