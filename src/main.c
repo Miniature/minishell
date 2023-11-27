@@ -12,6 +12,9 @@
 
 #include <stdio.h>
 #include <unistd.h>
+#include "r_signal.h"
+
+t_signal	g_signal;
 
 int	main(int argc, char **argv, char **envp)
 {
@@ -21,5 +24,9 @@ int	main(int argc, char **argv, char **envp)
 	char buf[129];
 	buf[read(0, buf, 128)] = 0;
 		printf("minshell: %s\n", buf);
+	while (g_signal.signal == _SIGOKAY)
+	{
+
+	}
 	return (0);
 }
