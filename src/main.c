@@ -24,9 +24,10 @@ int	main(int argc, char **argv, char **envp)
 	char buf[129];
 	buf[read(0, buf, 128)] = 0;
 		printf("minshell: %s\n", buf);
-	while (g_signal.signal == _SIGOKAY)
+	while (g_signal.exit_code == 0)
 	{
-
+		signal(SIGINT, &signal_handler);
+		signal(SIGQUIT, &signal_handler);
 	}
 	return (0);
 }

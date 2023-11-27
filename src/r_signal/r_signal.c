@@ -19,7 +19,7 @@ void	signal_init(void)
 	g_signal.pid = 0;
 }
 
-void	signal_interrupt(int input_code)
+void	signal_handler(int input_code)
 {
 	if (input_code == SIGINT)
 	{
