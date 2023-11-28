@@ -6,25 +6,30 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 18:37:29 by wdavey            #+#    #+#             */
-/*   Updated: 2023/11/27 19:21:09 by wdavey           ###   ########.fr       */
+/*   Updated: 2023/11/28 16:33:32 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stddef.h>
+#include <stdio.h>
+#include <unistd.h>
+#include "env.h"
 #include "r_builtin.h"
+#include "libft.h"
 
 int	builtin_cd(t_command cmd)
 {
 	char	*path;
+	char	*oldpath;
 
 	path = cmd.argv[1];
 	if (path == NULL)
 	{
-		path = getenv("HOME");
+		path = ms_getenv("HOME");
 	}
-	else if (!strcmp(path, "-"))
+	else if (!ft_strncmp(path, "-", -1))
 	{
-		path = getenv("OLDPWD");
+		path = ms_getenv("OLDPWD");
 		printf("%s\n", path);
 	}
 	if (chdir(path) != 0)
