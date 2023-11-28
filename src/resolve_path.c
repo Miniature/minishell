@@ -6,7 +6,7 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 15:04:05 by wdavey            #+#    #+#             */
-/*   Updated: 2023/11/21 17:33:36 by wdavey           ###   ########.fr       */
+/*   Updated: 2023/11/28 16:25:03 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static char	*get_path_env(t_command cmd)
 {
 	char	**env;
 
-	env = cmd.envp;
+	env = *cmd.envp;
 	while (*env)
 	{
 		if (!ft_strncmp(*env, "PATH=", 5))

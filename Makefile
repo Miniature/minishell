@@ -9,12 +9,15 @@ export CFLAGS
 NAME:=minishell
 
 FILES:=\
+	r_builtin/r_builtin_cd\
 	str/str_add\
 	str/str_has_all\
 	str/str_has_any\
 	str/str\
 	utils/free_all\
-	exec_external_command\
+	exec_command\
+	exec_command_builtin\
+	exec_command_external\
 	main\
 	resolve_path\
 

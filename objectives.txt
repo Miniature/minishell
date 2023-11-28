@@ -51,7 +51,7 @@ probably handle as normal commands but check if a command (ie first element of a
 STRUCTURE STUFF:
 command data type
 	str[]:argv
-	str[]:envp (chaining cd with && complicates this, otherwise can all point to the same envp)
+	*str[]:envp (extra pointer level to keep synced between all edits)
 	fd[]:io pipes (i dont think we need to handle &2>)
 
 OTHER:

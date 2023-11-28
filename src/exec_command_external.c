@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_external_command.c                            :+:      :+:    :+:   */
+/*   exec_command_external.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 14:41:36 by wdavey            #+#    #+#             */
-/*   Updated: 2023/11/21 17:04:02 by wdavey           ###   ########.fr       */
+/*   Updated: 2023/11/28 16:25:18 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include "libft.h"
 #include "command.h"
 
-static void	exec_command_forked(char *cmd_path, t_command cmd)
+static void	exec_command_external_fork(char *cmd_path, t_command cmd)
 {
 	if (-1 == dup2(cmd.fd[IN], STDIN_FILENO))
 	{
@@ -30,7 +30,7 @@ static void	exec_command_forked(char *cmd_path, t_command cmd)
 	}
 	else
 	{
-		execve(cmd_path, cmd.argv, cmd.envp);
+		execve(cmd_path, cmd.argv, *cmd.envp);
 		perror("minishell: exec");
 	}
 	close(STDIN_FILENO);
@@ -38,7 +38,7 @@ static void	exec_command_forked(char *cmd_path, t_command cmd)
 	exit(1);
 }
 
-int	exec_external_command(t_command cmd)
+int	exec_command_external(t_command cmd)
 {
 	char	*cmd_path;
 	pid_t	pid;
@@ -56,7 +56,7 @@ int	exec_external_command(t_command cmd)
 		perror("minishell: exec");
 	if (0 == pid)
 	{
-		exec_command_forked(cmd_path, cmd);
+		exec_command_external_fork(cmd_path, cmd);
 	}
 	return (pid);
 }
