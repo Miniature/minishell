@@ -1,6 +1,6 @@
 #include "r_signal.h"
 
-//t_signal	g_signal;
+int	g_signal;
 
 //move to libft
 void	*ft_memdel(void *ptr)
@@ -15,8 +15,7 @@ void	*ft_memdel(void *ptr)
 
 void	signal_init(void)
 {
-	g_signal.signal = _SIGOKAY;
-	g_signal.pid = 0;
+	g_signal = _SIGOKAY;
 }
 
 void	signal_handler(int input_code)
@@ -27,6 +26,6 @@ void	signal_handler(int input_code)
 		rl_replaceline("", 0);
 		rl_on_new_line();
 		rl_redisplay();
-		g_signal.signal = _SIGINTERUPT;
+		g_signal = _SIGINTERUPT;
 	}
 }
