@@ -15,9 +15,9 @@ FILES:=\
 	str/str_has_any\
 	str/str\
 	utils/free_all\
-	exec_command\
-	exec_command_builtin\
-	exec_command_external\
+	exec/exec_command\
+	exec/exec_command_builtin\
+	exec/exec_command_external\
 	main\
 	resolve_path\
 
