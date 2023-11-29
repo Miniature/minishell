@@ -21,7 +21,7 @@ typedef struct s_string {
 	size_t	size;
 }	t_string;
 
-int	ft_strncasecmp(char* s1, char* s2, int n);
+int			ft_strncasecmp(char* s1, char* s2, int n);
 t_string	string_new(void);
 t_string	string_new_cstr(char *cstr);
 t_string	*string_del(t_string *s);
