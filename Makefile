@@ -9,6 +9,7 @@ export CFLAGS
 NAME:=minishell
 
 FILES:=\
+	env/env\
 	r_builtin/r_builtin_cd\
 	str/str_add\
 	str/str_has_all\
@@ -22,6 +23,7 @@ FILES:=\
 	exec/exec_command_external\
 	main\
 	resolve_path\
+	parse/parse\
 
 BONUS:=\
 
