@@ -15,6 +15,8 @@ FILES:=\
 	str/str_has_any\
 	str/str\
 	utils/free_all\
+	array_append\
+	array_last\
 	exec/exec_command\
 	exec/exec_command_builtin\
 	exec/exec_command_external\
