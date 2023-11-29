@@ -14,5 +14,6 @@
 # define UTILS_H
 
 void	free_all(char **strs);
+char	**array_append(char ***arglist, const char *arg);
 
 #endif

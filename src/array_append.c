@@ -14,7 +14,7 @@
 #include <stdlib.h>
 #include "libft.h"
 
-static char	**array_append(char ***arglist, const char *arg)
+char	**array_append(char ***arglist, const char *arg)
 {
 	size_t	listsize;
 	char	**newlist;
