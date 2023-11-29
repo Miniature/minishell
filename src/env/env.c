@@ -1,5 +1,6 @@
 #include "env.h"
 #include "utils.h"
+#include "libft.h"
 
 char	*ms_getenv(char ***envp, char *name)
 {
@@ -48,7 +49,7 @@ bool	update_env(char **env, char *value, int name_length)
 	i = -1;
 	while (env[++i])
 	{
-		if (ft_strncasecmp(env[i], value, name_length + 1))
+		if (ft_strncmp(env[i], value, name_length + 1))
 		{
 			if (ft_strnequ(env[i], value, ft_strlen(value)) == 0)
 			{			
@@ -58,28 +59,5 @@ bool	update_env(char **env, char *value, int name_length)
 			return (1);
 		}
 	}
-	return (0);
-}
-
-int	ft_strncasecmp(char *s1, char *s2, int n)
-{
-	if (n == 0)
-		return (0);
-	while (n-- != 0 && ft_tolower(*s1) == ft_tolower(*s2))
-	{
-		if (n == 0 || *s1 == '\0' || *s2 == '\0')
-			break;
-		s1++;
-		s2++;
-	}
-	return (ft_tolower(*(unsigned char *)s1) - ft_tolower(*(unsigned char *)s2));
-}
-
-int	ft_strnequ(const char *s1, const char *s2, size_t n)
-{
-	if (!s1 || !s2)
-		return (0);
-	if (!ft_strncmp(s1, s2, n))
-		return (1);
 	return (0);
 }
