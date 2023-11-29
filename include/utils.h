@@ -14,10 +14,7 @@
 # define UTILS_H
 
 void	free_all(char **strs);
-<<<<<<< HEAD
 char	**array_append(char ***arglist, const char *arg);
-=======
 void	*array_last(void **a);
->>>>>>> af26943d0606fc58f0da68db166ef28125ac398d
 
 #endif
