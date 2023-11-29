@@ -6,7 +6,7 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 14:41:36 by wdavey            #+#    #+#             */
-/*   Updated: 2023/11/28 16:25:18 by wdavey           ###   ########.fr       */
+/*   Updated: 2023/11/29 14:25:15 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,26 +15,24 @@
 #include <stdlib.h>
 #include "libft.h"
 #include "command.h"
+#include "env.h"
+#include "utils.h"
 
 static void	exec_command_external_fork(char *cmd_path, t_command cmd)
 {
 	if (-1 == dup2(cmd.fd[IN], STDIN_FILENO))
 	{
 		perror("minishell: exec");
-		close(cmd.fd[IN]);
 	}
 	else if (-1 == dup2(cmd.fd[OUT], STDOUT_FILENO))
 	{
 		perror("minishell: exec");
-		close(cmd.fd[OUT]);
 	}
 	else
 	{
 		execve(cmd_path, cmd.argv, *cmd.envp);
 		perror("minishell: exec");
 	}
-	close(STDIN_FILENO);
-	close(STDOUT_FILENO);
 	exit(1);
 }
 
@@ -49,8 +47,10 @@ int	exec_command_external(t_command cmd)
 		write(2, "minishell: command not found: ", 31);
 		write(2, cmd.argv[0], ft_strlen(cmd.argv[0]));
 		write(2, "\n", 1);
+		ms_setenv(cmd.envp, ft_strjoin("_=", cmd.argv[0]));
 		return (-1);
 	}
+	ms_setenv(cmd.envp, ft_strjoin("_=", cmd_path));
 	pid = fork();
 	if (-1 == pid)
 		perror("minishell: exec");
@@ -58,5 +58,6 @@ int	exec_command_external(t_command cmd)
 	{
 		exec_command_external_fork(cmd_path, cmd);
 	}
+	ms_setenv(cmd.envp, ft_strjoin("_=", array_last(cmd.argv)));
 	return (pid);
 }
