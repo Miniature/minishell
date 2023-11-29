@@ -6,7 +6,7 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 14:41:36 by wdavey            #+#    #+#             */
-/*   Updated: 2023/11/29 14:25:15 by wdavey           ###   ########.fr       */
+/*   Updated: 2023/11/29 15:05:41 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,6 @@ int	exec_command_external(t_command cmd)
 	{
 		exec_command_external_fork(cmd_path, cmd);
 	}
-	ms_setenv(cmd.envp, ft_strjoin("_=", array_last(cmd.argv)));
+	ms_setenv(cmd.envp, ft_strjoin("_=", array_last((void **)cmd.argv)));
 	return (pid);
 }
