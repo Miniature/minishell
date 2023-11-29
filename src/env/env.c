@@ -41,7 +41,7 @@ void	ms_setenv(char ***envp, char *value)
 	}
 }
 
-int	update_env(char **env, char *value, int name_length)
+bool	update_env(char **env, char *value, int name_length)
 {
 	int	i;
 
