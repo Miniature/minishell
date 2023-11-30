@@ -29,6 +29,7 @@ char		*string_pop(t_string *s);
 
 t_string	*string_addcstr(t_string *s, const char *s2);
 t_string	*string_addchar(t_string *s, char c);
+int			ft_strcmp(const char *s1, const char *s2);
 bool		ft_strnequ(const char* s1, const char* s2, size_t n);
 bool		str_has_any(char *str, bool(*f)(char));
 bool		str_has_any_char(char *str, char c);

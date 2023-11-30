@@ -14,7 +14,10 @@
 # define R_BUILTIN_H
 
 # include "command.h"
+# include "str.h"
 
-int	builtin_cd(t_command cmd);
+int		builtin_cd(t_command cmd);
+void	builtin_pwd();
+int		builtin_echo(char **args);
 
 #endif
