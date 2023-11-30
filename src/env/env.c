@@ -42,6 +42,48 @@ void	ms_setenv(char ***envp, char *value)
 	}
 }
 
+void	ms_unsetenv(char ***envp, char *name)
+{
+	int		i;
+	int		name_length;
+	char	**env;
+	char	**new_env;
+
+	name_length = ft_strlen(name);
+	env = *envp;
+	i = find_and_remove(env, name, name_length);
+	new_env = realloc(env, i * sizeof(char *));
+	if (new_env == NULL)
+	{
+		printf("Failed to reallocate memory ");
+		printf("while unsetting environment variable.\n");
+		return ;
+	}
+	*envp = new_env;
+}
+
+int	find_and_remove(char **env, char *name, int name_length)
+{
+	int i;
+
+	i = -1;
+	while (env[++i] != NULL)
+	{
+		if (ft_strncmp(env[i], char *value, int name_length) == 0
+			&& env[i][name_length] == '=')
+		{
+			free(env[i]);
+			while (env[i] != NULL)
+			{
+				env[i] = env[i + 1];
+				i++;
+			}
+			break ;
+		}
+	}
+	return (i);
+}
+
 bool	update_env(char **env, char *value, int name_length)
 {
 	int	i;

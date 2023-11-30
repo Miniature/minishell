@@ -15,5 +15,8 @@
 
 char	*ms_getenv(char ***envp, char *name);
 void	ms_setenv(char ***envp, char *value);
+void	ms_unsetenv(char*** envp, char* name);
+bool	update_env(char** env, char* value, int name_length);
+int		find_and_remove(char** env, char* name, int name_length);
 
 #endif
