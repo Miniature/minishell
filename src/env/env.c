@@ -2,6 +2,8 @@
 #include "utils.h"
 #include "libft.h"
 
+/* in "envp", find and return a pointer to the environment
+containing the input parameter "name". */
 char	*ms_getenv(char ***envp, char *name)
 {
 	char	**env;
@@ -18,6 +20,9 @@ char	*ms_getenv(char ***envp, char *name)
 	return (DEFAULT_PATH);
 }
 
+/* in "envp", set an associated environment variable to "value" if it exists,
+or create a new environment variable at the end of "envp" by appending it to
+the end of the array. */
 void	ms_setenv(char ***envp, char *value)
 {
 	int		name_length;
@@ -42,6 +47,8 @@ void	ms_setenv(char ***envp, char *value)
 	}
 }
 
+/* in "envp", find the environment variable called "name" and remove it, 
+reallocating the memory accordingly to avoid memory leaks */
 void	ms_unsetenv(char ***envp, char *name)
 {
 	int		i;
