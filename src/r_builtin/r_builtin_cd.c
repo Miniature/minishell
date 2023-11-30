@@ -38,7 +38,6 @@ int	builtin_cd(t_command cmd)
 		perror("cd");
 		return (1);
 	}
-	ms_setenv(cmd.envp, path);
 	ms_setenv(cmd.envp, oldpath);
 	return (0);
 }
