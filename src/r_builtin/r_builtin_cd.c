@@ -23,6 +23,7 @@ int	builtin_cd(t_command cmd)
 	char	*oldpath;
 
 	path = cmd.argv[1];
+	oldpath = ms_getenv(cmd.envp, "PATH");
 	if (path == NULL)
 	{
 		path = ms_getenv(cmd.envp, "HOME");
@@ -37,5 +38,7 @@ int	builtin_cd(t_command cmd)
 		perror("cd");
 		return (1);
 	}
+	ms_setenv(cmd.envp, path);
+	ms_setenv(cmd.envp, oldpath);
 	return (0);
 }

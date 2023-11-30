@@ -7,15 +7,17 @@ containing the input parameter "name". */
 char	*ms_getenv(char ***envp, char *name)
 {
 	char	**env;
+	int		i;
+	int		size;
 
+	i = 0;
 	env = *envp;
-	while (*env)
+	size = ft_strlen(name);
+	while (env[i])
 	{
-		if (!ft_strncmp(*env, name, ft_strlen(name)))
-		{
-			return (*env);
-		}
-		env++;
+		if (!(ft_strncmp(env[i], name, size) && env[i][size + 1] == '=')
+			return (env[i]);
+		i++;
 	}
 	return (DEFAULT_PATH);
 }
