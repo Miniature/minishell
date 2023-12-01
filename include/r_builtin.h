@@ -19,5 +19,6 @@
 int		builtin_cd(t_command cmd);
 void	builtin_pwd();
 int		builtin_echo(char **args);
+void	print_echo(char **args, bool n);
 
 #endif
