@@ -64,7 +64,7 @@ char	*resolve_path(t_command cmd)
 	char	*str;
 	char	*cwd;
 
-	if ('/' == cmd.argv[0][0])
+	if (cmd.argv[0][0] == '/')
 		str = ft_strdup(cmd.argv[0]);
 	else if (str_has_any_char(cmd.argv[0], '/'))
 	{

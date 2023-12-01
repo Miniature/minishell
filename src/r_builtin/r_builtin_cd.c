@@ -23,7 +23,7 @@ int	builtin_cd(t_command cmd)
 	char	*oldpath;
 
 	path = cmd.argv[1];
-	oldpath = ms_getenv(cmd.envp, "PATH");
+	oldpath = getcwd(NULL, 0);
 	if (path == NULL)
 	{
 		path = ms_getenv(cmd.envp, "HOME");
@@ -31,7 +31,6 @@ int	builtin_cd(t_command cmd)
 	else if (!ft_strncmp(path, "-", -1))
 	{
 		path = ms_getenv(cmd.envp, "OLDPWD");
-		printf("%s\n", path);
 	}
 	if (chdir(path) != 0)
 	{
@@ -41,3 +40,5 @@ int	builtin_cd(t_command cmd)
 	ms_setenv(cmd.envp, oldpath);
 	return (0);
 }
+
+//		printf("%s\n", path); << Add to line 34 if needed there >>
