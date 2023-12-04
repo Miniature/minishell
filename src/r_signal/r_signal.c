@@ -6,11 +6,12 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 16:45:37 by wdavey            #+#    #+#             */
-/*   Updated: 2023/12/04 16:45:37 by wdavey           ###   ########.fr       */
+/*   Updated: 2023/12/04 16:52:45 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "r_signal.h"
+#include <unistd.h>
 
 int	g_signal;
 

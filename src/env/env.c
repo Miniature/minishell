@@ -6,13 +6,14 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 16:50:04 by wdavey            #+#    #+#             */
-/*   Updated: 2023/12/04 16:50:42 by wdavey           ###   ########.fr       */
+/*   Updated: 2023/12/04 16:55:00 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "env.h"
 #include "utils.h"
 #include "libft.h"
+#include <stdbool.h>
 
 /* in "envp", find and return a pointer to the environment
 containing the input parameter "name". */
@@ -31,7 +32,7 @@ char	*ms_getenv(char ***envp, char *name)
 			return (env[i]);
 		i++;
 	}
-	return (DEFAULT_PATH);
+	return (NULL);
 }
 
 /* in "envp", set an associated environment variable to "value" if it exists,
