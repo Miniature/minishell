@@ -6,7 +6,7 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 18:10:56 by wdavey            #+#    #+#             */
-/*   Updated: 2023/11/29 17:43:13 by wdavey           ###   ########.fr       */
+/*   Updated: 2023/12/04 17:55:21 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,9 @@
 #include "env.h"
 #include <stdlib.h>
 #include "utils.h"
+#include "command.h"
+#include "libft.h"
+#include "str.h"
 
 t_signal	g_signal;
 
@@ -41,23 +44,50 @@ static char	**copy_envp(char **envp)
 	return (copy);
 }
 
-int	main(int argc, char **argv, char **envp)
+void	main_debug(int argc, char **argv, char ***envp)
 {
-	(void)argc;
-	(void)argv;
-	(void)envp;
-	envp = copy_envp(envp);
-	printf("%s\n", ms_getenv(&envp, "PATH"));
-	ms_setenv(&envp, "PATH=NONE");
-	printf("%s\n", ms_getenv(&envp, "PATH"));
-	ms_setenv(&envp, "ASDASD=NONE");
-	printf("%s\n", ms_getenv(&envp, "ASDASD"));
+	char	**tokens;
+	size_t	iii;
+
+	printf("%s\n", ms_getenv(envp, "PATH"));
+	ms_setenv(envp, "PATH=NONE");
+	printf("%s\n", ms_getenv(envp, "PATH"));
+	ms_setenv(envp, "ASDASD=NONE");
+	printf("%s\n", ms_getenv(envp, "ASDASD"));
 	printf("tokenize\n");
-	char **tokens = tokenize_input("arg0 arg1 \"arg2 arg2 arg2\" arg3>arg5", &envp);
-	for(int iii = 0; tokens[iii]; iii++)
+	**tokens = tokenize_input("arg0 arg1 \"arg2 arg2 arg2\" arg3>arg5",
+			&envp);
+	iii = -1;
+	while (NULL != tokens[++iii])
 	{
 		printf("%i %s\n", iii, tokens[iii]);
 	}
+	exec_command((t_command)
+	{
+		(char *[]){
+		"echo", "dshfjsd", "aaaaaa", NULL
+	},
+		&envp,
+	{0, 1}
+	});
+}
+
+int	main(int argc, char **argv, char **envp)
+{
+	char	*shlvl;
+
+	envp = copy_envp(envp);
+	shlvl = ms_getenv(&envp, "SHLVL");
+	if (NULL == shlvl)
+		ms_setenv(&envp, "SHLVL=1");
+	else
+	{
+		shlvl = ft_itoa(ft_atoi(ft_strchr(shlvl, '=') + 1) + 1);
+		ms_setenv(&envp, string_addcstr(&(t_string){ft_strdup("SHLVL="), 7},
+				shlvl)->cstr);
+		free(shlvl);
+	}
+	main_debug(argc, argv, &envp);
 	free_all(envp);
 	return (0);
 }
