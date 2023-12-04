@@ -17,6 +17,7 @@ FILES:=\
 	r_builtin/r_builtin_cd\
 	r_builtin/r_builtin_echo\
 	r_builtin/r_builtin_pwd\
+	r_builtin/r_builtin_unset\
 	str/str_add\
 	str/str_has_all\
 	str/str_has_any\

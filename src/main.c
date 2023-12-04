@@ -6,7 +6,7 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 18:10:56 by wdavey            #+#    #+#             */
-/*   Updated: 2023/12/04 18:23:03 by wdavey           ###   ########.fr       */
+/*   Updated: 2023/12/04 19:38:23 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,10 @@ void	main_debug(int argc, char **argv, char ***envp)
 	printf("%s\n", ms_getenv(envp, "PATH"));
 	ms_setenv(envp, "ASDASD=NONE");
 	printf("%s\n", ms_getenv(envp, "ASDASD"));
+	exec_command((t_command){(char *[]){"unset", "ASDASD", NULL}, envp,
+	{0, 1}});
 	printf("tokenize\n");
-	tokens = tokenize_input("arg0 $PATH \"arg2 arg2 arg2\" arg3>arg5",
+	tokens = tokenize_input("arg0 $PATH $ASDASD \"arg2 arg2 arg2\" arg3>arg5",
 			envp);
 	iii = -1;
 	while (NULL != tokens[++iii])
@@ -76,19 +78,20 @@ void	main_debug(int argc, char **argv, char ***envp)
 int	main(int argc, char **argv, char **envp)
 {
 	char	*shlvl;
+	char	**env;
 
-	envp = copy_envp(envp);
-	shlvl = ms_getenv(&envp, "SHLVL");
+	env = copy_envp(envp);
+	shlvl = ms_getenv(&env, "SHLVL");
 	if (NULL == shlvl)
-		ms_setenv(&envp, "SHLVL=1");
+		ms_setenv(&env, "SHLVL=1");
 	else
 	{
 		shlvl = ft_itoa(ft_atoi(ft_strchr(shlvl, '=') + 1) + 1);
-		ms_setenv(&envp, string_addcstr(&(t_string){ft_strdup("SHLVL="), 7},
+		ms_setenv(&env, string_addcstr(&(t_string){ft_strdup("SHLVL="), 7},
 				shlvl)->cstr);
 		free(shlvl);
 	}
-	main_debug(argc, argv, &envp);
-	free_all(envp);
+	main_debug(argc, argv, &env);
+	free_all(env);
 	return (0);
 }
