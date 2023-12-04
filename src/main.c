@@ -6,7 +6,7 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 18:10:56 by wdavey            #+#    #+#             */
-/*   Updated: 2023/12/04 19:45:57 by wdavey           ###   ########.fr       */
+/*   Updated: 2023/12/04 20:01:50 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,9 @@ void	main_debug(int argc, char **argv, char ***envp)
 	while (NULL != tokens[++iii])
 	{
 		printf("%lu %s\n", iii, tokens[iii]);
+		free(tokens[iii]);
 	}
+	free(tokens);
 	exec_command((t_command)
 	{
 		(char *[]){

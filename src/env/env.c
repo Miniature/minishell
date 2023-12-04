@@ -6,7 +6,7 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 16:50:04 by wdavey            #+#    #+#             */
-/*   Updated: 2023/12/04 19:33:51 by wdavey           ###   ########.fr       */
+/*   Updated: 2023/12/04 20:02:31 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ bool	update_env(char **env, char *value, int name_length)
 		if (0 == ft_strncmp(env[i], value, name_length + 1))
 		{
 			free(env[i]);
-			env[i] = ft_strdup(value);
+			env[i] = value;
 			return (1);
 		}
 	}
