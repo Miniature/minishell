@@ -6,7 +6,7 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 19:01:01 by wdavey            #+#    #+#             */
-/*   Updated: 2023/11/28 16:30:19 by wdavey           ###   ########.fr       */
+/*   Updated: 2023/12/04 16:56:20 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ typedef struct s_builtin
 static const t_builtin	*get_builtins(void)
 {
 	return ((t_builtin []){
-		(t_builtin){"echo", NULL},
+		(t_builtin){"echo", &builtin_echo},
 		(t_builtin){"cd", &builtin_cd},
-		(t_builtin){"pwd", NULL},
+		(t_builtin){"pwd", &builtin_pwd},
 		(t_builtin){"export", NULL},
 		(t_builtin){"unset", NULL},
 		(t_builtin){"env", NULL},
