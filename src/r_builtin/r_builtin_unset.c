@@ -6,7 +6,7 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 19:34:09 by wdavey            #+#    #+#             */
-/*   Updated: 2023/12/04 19:36:47 by wdavey           ###   ########.fr       */
+/*   Updated: 2023/12/04 19:45:22 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	builtin_unset(t_command cmd)
 		if (ft_strncmp(env[i], name, name_length) == 0
 			&& env[i][name_length] == '=')
 		{
-			ms_unsetenv(env, name);
+			ms_unsetenv(&env, name);
 			break ;
 		}
 		i++;
