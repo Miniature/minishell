@@ -6,7 +6,7 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 18:10:56 by wdavey            #+#    #+#             */
-/*   Updated: 2023/12/04 17:55:21 by wdavey           ###   ########.fr       */
+/*   Updated: 2023/12/04 18:23:03 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,9 @@
 #include "command.h"
 #include "libft.h"
 #include "str.h"
+#include "parse.h"
 
 t_signal	g_signal;
-
-char	**tokenize_input(char *str, char ***envp);
 
 //envp gets edited, so it needs to not be in static memory
 static char	**copy_envp(char **envp)
@@ -49,25 +48,27 @@ void	main_debug(int argc, char **argv, char ***envp)
 	char	**tokens;
 	size_t	iii;
 
+	(void)argc;
+	(void)argv;
 	printf("%s\n", ms_getenv(envp, "PATH"));
 	ms_setenv(envp, "PATH=NONE");
 	printf("%s\n", ms_getenv(envp, "PATH"));
 	ms_setenv(envp, "ASDASD=NONE");
 	printf("%s\n", ms_getenv(envp, "ASDASD"));
 	printf("tokenize\n");
-	**tokens = tokenize_input("arg0 arg1 \"arg2 arg2 arg2\" arg3>arg5",
-			&envp);
+	tokens = tokenize_input("arg0 $PATH \"arg2 arg2 arg2\" arg3>arg5",
+			envp);
 	iii = -1;
 	while (NULL != tokens[++iii])
 	{
-		printf("%i %s\n", iii, tokens[iii]);
+		printf("%lu %s\n", iii, tokens[iii]);
 	}
 	exec_command((t_command)
 	{
 		(char *[]){
 		"echo", "dshfjsd", "aaaaaa", NULL
 	},
-		&envp,
+		envp,
 	{0, 1}
 	});
 }
