@@ -6,14 +6,17 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 16:50:04 by wdavey            #+#    #+#             */
-/*   Updated: 2023/12/04 16:55:00 by wdavey           ###   ########.fr       */
+/*   Updated: 2023/12/04 17:01:49 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "env.h"
 #include "utils.h"
 #include "libft.h"
+#include "str.h"
 #include <stdbool.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 /* in "envp", find and return a pointer to the environment
 containing the input parameter "name". */
@@ -91,7 +94,7 @@ int	find_and_remove(char **env, char *name, int name_length)
 	i = -1;
 	while (env[++i] != NULL)
 	{
-		if (ft_strncmp(env[i], char *value, int name_length) == 0
+		if (ft_strncmp(env[i], name, name_length) == 0
 			&& env[i][name_length] == '=')
 		{
 			free(env[i]);

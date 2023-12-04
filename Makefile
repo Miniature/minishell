@@ -10,20 +10,23 @@ NAME:=minishell
 
 FILES:=\
 	env/env\
+	exec/exec_command\
+	exec/exec_command_builtin\
+	exec/exec_command_external\
+	parse/tokenize\
 	r_builtin/r_builtin_cd\
+	r_builtin/r_builtin_echo\
+	r_builtin/r_builtin_pwd\
 	str/str_add\
 	str/str_has_all\
 	str/str_has_any\
 	str/str\
 	utils/free_all\
+	utils/ft_realloc\
 	array_append\
 	array_last\
-	exec/exec_command\
-	exec/exec_command_builtin\
-	exec/exec_command_external\
 	main\
 	resolve_path\
-	parse/parse\
 
 BONUS:=\
 

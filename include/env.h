@@ -6,12 +6,14 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 16:26:42 by wdavey            #+#    #+#             */
-/*   Updated: 2023/12/04 16:48:05 by wdavey           ###   ########.fr       */
+/*   Updated: 2023/12/04 16:59:05 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ENV_H
 # define ENV_H
+
+# include <stdbool.h>
 
 char	*ms_getenv(char ***envp, char *name);
 void	ms_setenv(char ***envp, char *value);

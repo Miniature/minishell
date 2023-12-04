@@ -6,19 +6,14 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 19:01:01 by wdavey            #+#    #+#             */
-/*   Updated: 2023/12/04 16:56:20 by wdavey           ###   ########.fr       */
+/*   Updated: 2023/12/04 16:56:58 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "command.h"
 #include "libft.h"
 #include "r_builtin.h"
-
-typedef struct s_builtin
-{
-	char	*name;
-	int		(*function)(t_command);
-}	t_builtin;
+#include "exec.h"
 
 //last is NULL NULL
 static const t_builtin	*get_builtins(void)

@@ -1,36 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   str_has_all.c                                      :+:      :+:    :+:   */
+/*   exec.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/23 10:11:38 by wdavey            #+#    #+#             */
-/*   Updated: 2023/12/04 17:05:20 by wdavey           ###   ########.fr       */
+/*   Created: 2023/12/04 16:57:01 by wdavey            #+#    #+#             */
+/*   Updated: 2023/12/04 16:58:56 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdbool.h>
-#include <stddef.h>
-#include "str.h"
-#include "libft.h"
+#ifndef EXEC_H
+# define EXEC_H
 
-bool	str_has_all(char *str, bool(*f)(char))
-{
-	while (*str)
-	{
-		if (!f(*str))
-			return (false);
-		str++;
-	}
-	return (true);
-}
+# include "command.h"
 
-bool	ft_strnequ(const char *s1, const char *s2, size_t n)
+typedef struct s_builtin
 {
-	if (!s1 || !s2)
-		return (0);
-	if (!ft_strncmp(s1, s2, n))
-		return (1);
-	return (0);
-}
+	char	*name;
+	int		(*function)(t_command);
+}	t_builtin;
+
+#endif

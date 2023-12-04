@@ -6,12 +6,13 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 10:11:38 by wdavey            #+#    #+#             */
-/*   Updated: 2023/12/04 16:52:22 by wdavey           ###   ########.fr       */
+/*   Updated: 2023/12/04 17:05:33 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdbool.h>
 #include <stddef.h>
+#include "libft.h"
 
 bool	str_has_any(char *str, bool(*f)(char))
 {
