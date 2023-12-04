@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   env.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/12/04 16:50:04 by wdavey            #+#    #+#             */
+/*   Updated: 2023/12/04 16:50:42 by wdavey           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "env.h"
 #include "utils.h"
 #include "libft.h"
@@ -15,7 +27,7 @@ char	*ms_getenv(char ***envp, char *name)
 	size = ft_strlen(name);
 	while (env[i])
 	{
-		if (!(ft_strncmp(env[i], name, size) && env[i][size + 1] == '=')
+		if (!(ft_strncmp(env[i], name, size) && env[i][size + 1] == '='))
 			return (env[i]);
 		i++;
 	}
@@ -31,7 +43,7 @@ void	ms_setenv(char ***envp, char *value)
 	int		i;
 	char	**env;
 	char	*equal;
-	
+
 	env = *envp;
 	i = -1;
 	equal = ft_strchr(value, '=');
@@ -73,7 +85,7 @@ void	ms_unsetenv(char ***envp, char *name)
 
 int	find_and_remove(char **env, char *name, int name_length)
 {
-	int i;
+	int	i;
 
 	i = -1;
 	while (env[++i] != NULL)
@@ -103,7 +115,7 @@ bool	update_env(char **env, char *value, int name_length)
 		if (ft_strncmp(env[i], value, name_length + 1))
 		{
 			if (ft_strnequ(env[i], value, ft_strlen(value)) == 0)
-			{			
+			{
 				free(env[i]);
 				env[i] = ft_strdup(value);
 			}

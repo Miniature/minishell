@@ -1,5 +1,17 @@
-#ifndef FT_R_SIGNAL_H
-# define FT_R_SIGNAL_H
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   r_signal.h                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/12/04 16:48:52 by wdavey            #+#    #+#             */
+/*   Updated: 2023/12/04 16:49:00 by wdavey           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef R_SIGNAL_H
+# define R_SIGNAL_H
 
 # include "libft.h"
 # include <signal.h>
@@ -18,7 +30,6 @@ typedef struct s_signal
 	int						pid;
 	int						exit_code;
 }	t_signal;
-
 
 void	signal_init(void);
 void	signal_handler(int input_code);

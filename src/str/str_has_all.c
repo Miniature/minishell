@@ -6,7 +6,7 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 10:11:38 by wdavey            #+#    #+#             */
-/*   Updated: 2023/09/11 16:34:20 by wdavey           ###   ########.fr       */
+/*   Updated: 2023/12/04 16:47:11 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ bool	str_has_all(char *str, bool(*f)(char))
 	return (true);
 }
 
-bool	ft_strnequ(const char* s1, const char* s2, size_t n)
+bool	ft_strnequ(const char *s1, const char *s2, size_t n)
 {
 	if (!s1 || !s2)
 		return (0);

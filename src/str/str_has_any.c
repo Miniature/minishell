@@ -6,7 +6,7 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 10:11:38 by wdavey            #+#    #+#             */
-/*   Updated: 2023/11/21 15:10:33 by wdavey           ###   ########.fr       */
+/*   Updated: 2023/12/04 16:46:35 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,18 +34,19 @@ bool	str_has_any_char(char *str, char c)
 	return (false);
 }
 
-int	ft_strncasecmp(char* s1, char* s2, int n)
+int	ft_strncasecmp(char *s1, char *s2, int n)
 {
 	if (n == 0)
 		return (0);
 	while (n-- != 0 && ft_tolower(*s1) == ft_tolower(*s2))
 	{
 		if (n == 0 || *s1 == '\0' || *s2 == '\0')
-			break;
+			break ;
 		s1++;
 		s2++;
 	}
-	return (ft_tolower(*(unsigned char*)s1) - ft_tolower(*(unsigned char*)s2));
+	return (ft_tolower(*(unsigned char *)s1)
+		- ft_tolower(*(unsigned char *)s2));
 }
 
 int	ft_strcmp(const char *s1, const char *s2)
