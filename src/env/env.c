@@ -6,7 +6,7 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 16:50:04 by wdavey            #+#    #+#             */
-/*   Updated: 2023/12/04 17:01:49 by wdavey           ###   ########.fr       */
+/*   Updated: 2023/12/04 19:19:34 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ char	*ms_getenv(char ***envp, char *name)
 	size = ft_strlen(name);
 	while (env[i])
 	{
-		if (!(ft_strncmp(env[i], name, size) && env[i][size + 1] == '='))
+		if (!ft_strncmp(env[i], name, size) && env[i][size] == '=')
 			return (env[i]);
 		i++;
 	}
