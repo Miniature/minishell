@@ -51,9 +51,9 @@ void	main_debug(int argc, char **argv, char ***envp)
 	(void)argc;
 	(void)argv;
 	printf("%s\n", ms_getenv(envp, "PATH"));
-	ms_setenv(envp, "PATH=NONE");
+	ms_setenv(envp, ft_strdup("PATH=NONE"));
 	printf("%s\n", ms_getenv(envp, "PATH"));
-	ms_setenv(envp, "ASDASD=NONE");
+	ms_setenv(envp, ft_strdup("ASDASD=NONE"));
 	printf("%s\n", ms_getenv(envp, "ASDASD"));
 	exec_command((t_command){(char *[]){"unset", "ASDASD", NULL}, envp,
 	{0, 1}});

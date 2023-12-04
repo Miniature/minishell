@@ -6,7 +6,7 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 16:50:04 by wdavey            #+#    #+#             */
-/*   Updated: 2023/12/04 19:19:34 by wdavey           ###   ########.fr       */
+/*   Updated: 2023/12/04 19:33:51 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,8 @@ void	ms_setenv(char ***envp, char *value)
 {
 	int		name_length;
 	int		i;
-	char	**env;
 	char	*equal;
 
-	env = *envp;
 	i = -1;
 	equal = ft_strchr(value, '=');
 	if (equal == NULL)
@@ -57,11 +55,9 @@ void	ms_setenv(char ***envp, char *value)
 		return ;
 	}
 	name_length = equal - value;
-	if (update_env(env, value, name_length) == 0)
+	if (update_env(*envp, value, name_length) == 0)
 	{
-		env = array_append(&env, value);
-		free(*envp);
-		*envp = env;
+		*envp = array_append(envp, value);
 	}
 }
 
@@ -116,13 +112,10 @@ bool	update_env(char **env, char *value, int name_length)
 	i = -1;
 	while (env[++i])
 	{
-		if (ft_strncmp(env[i], value, name_length + 1))
+		if (0 == ft_strncmp(env[i], value, name_length + 1))
 		{
-			if (ft_strnequ(env[i], value, ft_strlen(value)) == 0)
-			{
-				free(env[i]);
-				env[i] = ft_strdup(value);
-			}
+			free(env[i]);
+			env[i] = ft_strdup(value);
 			return (1);
 		}
 	}

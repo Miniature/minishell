@@ -6,7 +6,7 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 07:35:25 by wdavey            #+#    #+#             */
-/*   Updated: 2023/11/21 16:03:01 by wdavey           ###   ########.fr       */
+/*   Updated: 2023/12/04 19:28:56 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ t_string	*string_addcstr(t_string *s, const char *s2)
 {
 	if (0 == s->size)
 		string_minsize(s, ft_strlen(s2) + 1);
-	else if (ft_strlen(s->cstr) + ft_strlen(s2) > s->size)
+	else if (ft_strlen(s->cstr) + ft_strlen(s2) + 1 > s->size)
 		string_minsize(s, ft_strlen(s->cstr) + ft_strlen(s2) + 1);
 	ft_strlcat(s->cstr, s2, s->size);
 	return (s);

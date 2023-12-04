@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse.c                                            :+:      :+:    :+:   */
+/*   tokenize.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 16:47:41 by wdavey            #+#    #+#             */
-/*   Updated: 2023/11/29 16:36:02 by wdavey           ###   ########.fr       */
+/*   Updated: 2023/12/04 19:22:12 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,7 @@
 #include "libft.h"
 #include "str.h"
 #include "env.h"
-
-char	**array_append(char ***arglist, const char *arg);
+#include "utils.h"
 
 static size_t	single_quote(char *str, t_string *current)
 {
@@ -31,6 +30,7 @@ static size_t	insert_env(char *str, char ***envp, t_string *current)
 {
 	t_string	name;
 	size_t		rval;
+	char		*var;
 
 	if ('?' == *str)
 	{
@@ -39,11 +39,13 @@ static size_t	insert_env(char *str, char ***envp, t_string *current)
 		free(name.cstr);
 		return (1);
 	}
-	name = string_new();
+	name = (t_string){ft_strdup(""), 1};
 	while (ft_isalnum(str[ft_strlen(name.cstr)]))
 		string_addchar(&name, str[ft_strlen(name.cstr)]);
-	string_addcstr(current, ms_getenv(envp, name.cstr)
-		+ ft_strlen(name.cstr) + 1);
+	var = ms_getenv(envp, name.cstr);
+	if (var)
+		string_addcstr(current, ms_getenv(envp, name.cstr)
+			+ ft_strlen(name.cstr) + 1);
 	rval = ft_strlen(name.cstr);
 	string_del(&name);
 	return (rval);
@@ -56,6 +58,9 @@ bool	is_meta_char(char c)
 		|| c == '>'
 		|| c == '<'
 		|| c == '|'
+		|| c == '('
+		|| c == ')'
+		|| c == '&'
 	);
 }
 
