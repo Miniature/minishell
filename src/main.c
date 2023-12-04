@@ -6,7 +6,7 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 18:10:56 by wdavey            #+#    #+#             */
-/*   Updated: 2023/12/04 19:38:23 by wdavey           ###   ########.fr       */
+/*   Updated: 2023/12/04 19:45:57 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,12 @@ void	main_debug(int argc, char **argv, char ***envp)
 	printf("%s\n", ms_getenv(envp, "PATH"));
 	ms_setenv(envp, ft_strdup("PATH=NONE"));
 	printf("%s\n", ms_getenv(envp, "PATH"));
+	printf("%s\n", ms_getenv(envp, "ASDASD"));
 	ms_setenv(envp, ft_strdup("ASDASD=NONE"));
 	printf("%s\n", ms_getenv(envp, "ASDASD"));
 	exec_command((t_command){(char *[]){"unset", "ASDASD", NULL}, envp,
 	{0, 1}});
+	printf("%s\n", ms_getenv(envp, "ASDASD"));
 	printf("tokenize\n");
 	tokens = tokenize_input("arg0 $PATH $ASDASD \"arg2 arg2 arg2\" arg3>arg5",
 			envp);
