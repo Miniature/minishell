@@ -6,7 +6,7 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 14:41:36 by wdavey            #+#    #+#             */
-/*   Updated: 2023/11/29 15:05:41 by wdavey           ###   ########.fr       */
+/*   Updated: 2023/12/04 19:05:35 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,11 @@
 
 static void	exec_command_external_fork(char *cmd_path, t_command cmd)
 {
-	if (-1 == dup2(cmd.fd[IN], STDIN_FILENO))
+	if (-1 == dup2(cmd.fd[FD_IN], STDIN_FILENO))
 	{
 		perror("minishell: exec");
 	}
-	else if (-1 == dup2(cmd.fd[OUT], STDOUT_FILENO))
+	else if (-1 == dup2(cmd.fd[FD_OUT], STDOUT_FILENO))
 	{
 		perror("minishell: exec");
 	}
