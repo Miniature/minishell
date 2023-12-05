@@ -6,7 +6,7 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 16:47:41 by wdavey            #+#    #+#             */
-/*   Updated: 2023/12/05 17:00:32 by wdavey           ###   ########.fr       */
+/*   Updated: 2023/12/05 18:00:21 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,9 +101,9 @@ char	**tokenize_input(char *str, char ***envp)
 	iii = -1;
 	while (str[++iii])
 	{
-		if (str[iii] '\'')
+		if (str[iii] == '\'')
 			iii += single_quote(str + iii, &arg);
-		else if (str[iii] '$')
+		else if (str[iii] == '$')
 			iii += insert_env(str + iii + 1, envp, &arg);
 		else if ('~' == str[iii] && (0 == iii || ' ' == str[iii - 1])
 			&& ms_getenv(envp, "HOME"))
