@@ -17,10 +17,10 @@ void	free_all(char **strs)
 	size_t	iii;
 	char	*now;
 
-	if (NULL == strs)
+	if (strs == NULL)
 		return ;
 	iii = -1;
-	while (NULL != strs[++iii])
+	while (strs[++iii] != NULL)
 	{
 		now = strs[iii];
 		free(strs[iii]);

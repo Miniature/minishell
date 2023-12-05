@@ -15,7 +15,8 @@
 #include "libft.h"
 #include "str.h"
 #include <stdbool.h>
-#include <stdio.h>
+#include <stdio.h>.
+#include <unistd.h>
 #include <stdlib.h>
 
 /* in "envp", find and return a pointer to the environment
@@ -51,7 +52,7 @@ void	ms_setenv(char ***envp, char *value)
 	equal = ft_strchr(value, '=');
 	if (equal == NULL)
 	{
-		printf("Error: Invalid Environment Variable\n");
+		write(cmd.fd[FD_OUT], "Error: Invalid Environment Variable\n", 36);
 		return ;
 	}
 	name_length = equal - value;
@@ -76,8 +77,8 @@ void	ms_unsetenv(char ***envp, char *name)
 	new_env = realloc(env, i * sizeof(char *));
 	if (new_env == NULL)
 	{
-		printf("Failed to reallocate memory ");
-		printf("while unsetting environment variable.\n");
+		write(cmd.fd[FD_OUT], "Failed to reallocate memory ", 28);
+		write(cmd.fd[FD_OUT], "while unsetting environment variable.\n", 38);
 		return ;
 	}
 	*envp = new_env;
@@ -112,7 +113,7 @@ bool	update_env(char **env, char *value, int name_length)
 	i = -1;
 	while (env[++i])
 	{
-		if (0 == ft_strncmp(env[i], value, name_length + 1))
+		if (ft_strncmp(env[i], value, name_length + 1) == 0)
 		{
 			free(env[i]);
 			env[i] = value;

@@ -35,9 +35,9 @@ int	exec_command(t_command cmd)
 	size_t	iii;
 
 	iii = -1;
-	while (NULL != get_builtins()[++iii].name)
+	while (get_builtins()[++iii].name != NULL)
 	{
-		if (0 == ft_strncmp(cmd.argv[0], get_builtins()[iii].name, -1))
+		if (ft_strncmp(cmd.argv[0], get_builtins()[iii].name, -1) == 0)
 		{
 			return (exec_command_builtin(cmd, get_builtins()[iii].function));
 		}

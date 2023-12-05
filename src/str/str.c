@@ -34,7 +34,7 @@ t_string	string_new_cstr(char *cstr)
 
 t_string	*string_del(t_string *s)
 {
-	if (0 != s->size)
+	if (s->size != 0)
 		free(s->cstr);
 	s->cstr = NULL;
 	s->size = 0;

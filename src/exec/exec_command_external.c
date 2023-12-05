@@ -20,11 +20,11 @@
 
 static void	exec_command_external_fork(char *cmd_path, t_command cmd)
 {
-	if (-1 == dup2(cmd.fd[FD_IN], STDIN_FILENO))
+	if (dup2(cmd.fd[FD_IN], STDIN_FILENO) == -1)
 	{
 		perror("minishell: exec");
 	}
-	else if (-1 == dup2(cmd.fd[FD_OUT], STDOUT_FILENO))
+	else if (dup2(cmd.fd[FD_OUT], STDOUT_FILENO) == -1)
 	{
 		perror("minishell: exec");
 	}
@@ -42,7 +42,7 @@ int	exec_command_external(t_command cmd)
 	pid_t	pid;
 
 	cmd_path = resolve_path(cmd);
-	if (NULL == cmd_path)
+	if (cmd_path == NULL)
 	{
 		write(2, "minishell: command not found: ", 31);
 		write(2, cmd.argv[0], ft_strlen(cmd.argv[0]));
@@ -52,9 +52,9 @@ int	exec_command_external(t_command cmd)
 	}
 	ms_setenv(cmd.envp, ft_strjoin("_=", cmd_path));
 	pid = fork();
-	if (-1 == pid)
+	if (pid == -1)
 		perror("minishell: exec");
-	if (0 == pid)
+	if (pid == 0)
 	{
 		exec_command_external_fork(cmd_path, cmd);
 	}

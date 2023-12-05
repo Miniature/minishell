@@ -20,7 +20,7 @@ char	**array_append(char ***arglist, const char *arg)
 	char	**newlist;
 
 	listsize = 0;
-	while (NULL != (*arglist)[listsize])
+	while ((*arglist)[listsize] != NULL)
 		listsize++;
 	newlist = malloc((listsize + 2) * (sizeof(**arglist)));
 	ft_memcpy(newlist, *arglist, listsize * sizeof(**arglist));

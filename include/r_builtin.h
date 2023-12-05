@@ -20,6 +20,6 @@ int		builtin_cd(t_command cmd);
 int		builtin_pwd(t_command cmd);
 int		builtin_echo(t_command cmd);
 int		builtin_unset(t_command cmd);
-void	print_echo(char **args, bool n);
+void	print_echo(t_command cmd, bool n);
 
 #endif
