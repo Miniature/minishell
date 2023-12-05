@@ -6,7 +6,7 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 16:44:28 by wdavey            #+#    #+#             */
-/*   Updated: 2023/12/04 17:04:57 by wdavey           ###   ########.fr       */
+/*   Updated: 2023/12/05 18:30:17 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include "r_builtin.h"
+#include "libft.h"
 
 int	builtin_pwd(t_command cmd)
 {

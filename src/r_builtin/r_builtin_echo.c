@@ -6,7 +6,7 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 16:42:27 by wdavey            #+#    #+#             */
-/*   Updated: 2023/12/04 17:04:15 by wdavey           ###   ########.fr       */
+/*   Updated: 2023/12/05 18:30:03 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include "str.h"
 #include "r_builtin.h"
 #include "command.h"
+#include "libft.h"
 
 int	builtin_echo(t_command cmd)
 {

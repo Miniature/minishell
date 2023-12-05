@@ -6,7 +6,7 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 16:50:04 by wdavey            #+#    #+#             */
-/*   Updated: 2023/12/04 20:02:31 by wdavey           ###   ########.fr       */
+/*   Updated: 2023/12/05 18:37:54 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "libft.h"
 #include "str.h"
 #include <stdbool.h>
-#include <stdio.h>.
+#include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
 
