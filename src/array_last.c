@@ -14,11 +14,11 @@
 
 void	*array_last(void **a)
 {
-	if (NULL == a)
+	if (a == NULL)
 		return (NULL);
-	if (NULL == *a)
+	if (*a == NULL)
 		return (*a);
-	while (NULL != *a)
+	while (*a != NULL)
 		a++;
 	return (*(a - 1));
 }

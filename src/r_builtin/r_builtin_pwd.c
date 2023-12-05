@@ -22,7 +22,10 @@ int	builtin_pwd(t_command cmd)
 	(void)cmd;
 	buf = getcwd(NULL, 0);
 	if (buf != NULL)
-		printf("%s\n", buf);
+	{
+		write(cmd.fd[FD_OUT], &buf, ft_strlen(buf));
+		write(cmd.fd[FD_OUT], "\n", 1);
+	}
 	else
 		perror("pwd");
 	free(buf);

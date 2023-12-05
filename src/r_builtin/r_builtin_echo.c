@@ -11,6 +11,8 @@
 /* ************************************************************************** */
 
 #include <stdio.h>
+#include <unistd.h>
+#include "str.h"
 #include "r_builtin.h"
 #include "command.h"
 
@@ -27,22 +29,24 @@ int	builtin_echo(t_command cmd)
 			n = 1;
 		i++;
 	}
-	print_echo(cmd.argv, n);
+	print_echo(cmd, n);
 	return (0);
 }
 
-void	print_echo(char **args, bool n)
+void	print_echo(t_command cmd, bool n)
 {
 	int	i;
+	char **args;
 
+	args = cmd.argv;
 	i = 1;
 	while (args[i])
 	{
-		printf("%s", args[i]);
+		write(cmd.fd[FD_OUT], &args[i], ft_strlen(args[i]));
 		if (args[i] != NULL)
-			printf(" ");
+			write(cmd.fd[FD_OUT], " ", 1);
 		i++;
 	}
 	if (n == 0)
-		printf("\n");
+		write(cmd.fd[FD_OUT], "\n", 1);
 }

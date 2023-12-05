@@ -20,19 +20,19 @@ t_string	*string_minsize(t_string *s, size_t min)
 	char	*tmp;
 	size_t	newsize;
 
-	if (min < s->size)
+	if (s->size > min)
 		return (s);
 	newsize = 1UL << 63;
-	while (0 == (newsize & min))
+	while ((newsize & min) == 0)
 		newsize = newsize >> 1;
 	newsize = newsize << 1;
 	tmp = s->cstr;
 	s->cstr = malloc(newsize * sizeof(*(s->cstr)));
-	if (NULL != tmp)
+	if (tmp != NULL)
 		ft_memcpy(s->cstr, tmp, s->size);
 	else
 		(s->cstr[0]) = '\0';
-	if (NULL != tmp)
+	if (tmp != NULL)
 		free(tmp);
 	s->size = newsize;
 	return (s);
@@ -40,9 +40,9 @@ t_string	*string_minsize(t_string *s, size_t min)
 
 t_string	*string_addcstr(t_string *s, const char *s2)
 {
-	if (0 == s->size)
+	if (s->size == 0)
 		string_minsize(s, ft_strlen(s2) + 1);
-	else if (ft_strlen(s->cstr) + ft_strlen(s2) + 1 > s->size)
+	else if (s->size < ft_strlen(s->cstr) + ft_strlen(s2) + 1)
 		string_minsize(s, ft_strlen(s->cstr) + ft_strlen(s2) + 1);
 	ft_strlcat(s->cstr, s2, s->size);
 	return (s);
@@ -50,9 +50,9 @@ t_string	*string_addcstr(t_string *s, const char *s2)
 
 t_string	*string_addchar(t_string *s, char c)
 {
-	if (0 == s->size)
+	if (s->size == 0)
 		string_minsize(s, 2);
-	else if (ft_strlen(s->cstr) + 1 >= s->size)
+	else if (s->size <= ft_strlen(s->cstr) + 1)
 		string_minsize(s, s->size + 1);
 	s->cstr[ft_strlen(s->cstr) + 1] = '\0';
 	s->cstr[ft_strlen(s->cstr)] = c;

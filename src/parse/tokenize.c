@@ -32,7 +32,7 @@ static size_t	insert_env(char *str, char ***envp, t_string *current)
 	size_t		rval;
 	char		*var;
 
-	if ('?' == *str)
+	if (*str == '?')
 	{
 		string_addcstr(current, ms_getenv(envp, "?"));
 		return (1);
@@ -67,7 +67,7 @@ static size_t	tokenize_step(char *str, char ***arglist, t_string *current)
 	size_t		iii;
 	static bool	in_quote;
 
-	if ('"' == str[0])
+	if (str[0] == '"')
 		in_quote = !in_quote;
 	else if (!in_quote && is_meta_char(str[0]))
 	{
@@ -101,9 +101,9 @@ char	**tokenize_input(char *str, char ***envp)
 	iii = -1;
 	while (str[++iii])
 	{
-		if ('\'' == str[iii])
+		if (str[iii] '\'')
 			iii += single_quote(str + iii, &arg);
-		else if ('$' == str[iii])
+		else if (str[iii] '$')
 			iii += insert_env(str + iii + 1, envp, &arg);
 		else if ('~' == str[iii] && (0 == iii || ' ' == str[iii - 1])
 			&& ms_getenv(envp, "HOME"))

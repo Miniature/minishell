@@ -22,7 +22,7 @@ int	exec_command_builtin(t_command cmd, int (*f)(t_command))
 
 	rval = f(cmd);
 	pid = fork();
-	if (0 == pid)
+	if (pid == 0)
 	{
 		exit(rval);
 	}
