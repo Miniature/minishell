@@ -52,7 +52,7 @@ void	ms_setenv(char ***envp, char *value)
 	equal = ft_strchr(value, '=');
 	if (equal == NULL)
 	{
-		write(cmd.fd[FD_OUT], "Error: Invalid Environment Variable\n", 36);
+		write(stderr, "Error: Invalid Environment Variable\n", 36);
 		return ;
 	}
 	name_length = equal - value;
@@ -77,8 +77,8 @@ void	ms_unsetenv(char ***envp, char *name)
 	new_env = realloc(env, i * sizeof(char *));
 	if (new_env == NULL)
 	{
-		write(cmd.fd[FD_OUT], "Failed to reallocate memory ", 28);
-		write(cmd.fd[FD_OUT], "while unsetting environment variable.\n", 38);
+		write(stderr, "Failed to reallocate memory ", 28);
+		write(stderr, "while unsetting environment variable.\n", 38);
 		return ;
 	}
 	*envp = new_env;
