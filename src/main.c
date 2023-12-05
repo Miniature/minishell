@@ -6,7 +6,7 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 18:10:56 by wdavey            #+#    #+#             */
-/*   Updated: 2023/12/04 20:01:50 by wdavey           ###   ########.fr       */
+/*   Updated: 2023/12/05 18:38:56 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 #include "command.h"
 #include "libft.h"
 #include "str.h"
-#include "parse.h"
+//#include "parse.h"
 
 t_signal	g_signal;
 
@@ -45,8 +45,6 @@ static char	**copy_envp(char **envp)
 
 void	main_debug(int argc, char **argv, char ***envp)
 {
-	char	**tokens;
-	size_t	iii;
 
 	(void)argc;
 	(void)argv;
@@ -59,6 +57,9 @@ void	main_debug(int argc, char **argv, char ***envp)
 	exec_command((t_command){(char *[]){"unset", "ASDASD", NULL}, envp,
 	{0, 1}});
 	printf("%s\n", ms_getenv(envp, "ASDASD"));
+	/*
+	char	**tokens;
+	size_t	iii;
 	printf("tokenize\n");
 	tokens = tokenize_input("arg0 $PATH $ASDASD \"arg2 arg2 arg2\" arg3>arg5",
 			envp);
@@ -69,6 +70,7 @@ void	main_debug(int argc, char **argv, char ***envp)
 		free(tokens[iii]);
 	}
 	free(tokens);
+	*/
 	exec_command((t_command)
 	{
 		(char *[]){
