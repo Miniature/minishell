@@ -13,7 +13,9 @@ FILES:=\
 	exec/exec_command\
 	exec/exec_command_builtin\
 	exec/exec_command_external\
+	parse/parse\
 	parse/tokenize\
+	parse/token_actions\
 	r_builtin/r_builtin_cd\
 	r_builtin/r_builtin_echo\
 	r_builtin/r_builtin_pwd\
@@ -26,6 +28,7 @@ FILES:=\
 	utils/ft_realloc\
 	array_append\
 	array_last\
+	command_delete\
 	main\
 	resolve_path\
 

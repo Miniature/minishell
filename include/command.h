@@ -6,7 +6,7 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 14:00:46 by wdavey            #+#    #+#             */
-/*   Updated: 2023/12/04 19:05:35 by wdavey           ###   ########.fr       */
+/*   Updated: 2023/12/05 14:47:51 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,7 @@ int		exec_command_builtin(t_command cmd, int (*f)(t_command));
 //for non-builtins
 int		exec_command_external(t_command cmd);
 char	*resolve_path(t_command cmd);
+
+void	command_free(t_command *cmd);
 
 #endif
