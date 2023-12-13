@@ -6,7 +6,7 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 16:42:27 by wdavey            #+#    #+#             */
-/*   Updated: 2023/12/13 19:00:14 by wdavey           ###   ########.fr       */
+/*   Updated: 2023/12/13 19:22:48 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,10 @@ void	print_echo(t_command cmd, bool n)
 	while (args[i])
 	{
 		write(cmd.fd[FD_OUT], args[i], ft_strlen(args[i]));
-		if (args[i] != NULL)
+		if (args[i + 1] != NULL)
 			write(cmd.fd[FD_OUT], " ", 1);
 		i++;
 	}
-	if (n == 0)
+	if (n)
 		write(cmd.fd[FD_OUT], "\n", 1);
 }
