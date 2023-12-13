@@ -31,7 +31,7 @@ FILES:=\
 	utils/ft_realloc\
 	array_append\
 	array_last\
-	command_delete\
+	command_free\
 	main\
 	resolve_path\
 

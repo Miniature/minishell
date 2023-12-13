@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   command_delete.c                                   :+:      :+:    :+:   */
+/*   command_free.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 14:43:40 by wdavey            #+#    #+#             */
-/*   Updated: 2023/12/05 14:47:43 by wdavey           ###   ########.fr       */
+/*   Updated: 2023/12/13 20:12:51 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,5 +20,6 @@ void	command_free(t_command *cmd)
 		close(cmd->fd[FD_IN]);
 	if (STDOUT_FILENO != cmd->fd[FD_OUT])
 		close(cmd->fd[FD_OUT]);
+	free(cmd->argv);
 	free(cmd);
 }
