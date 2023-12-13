@@ -6,7 +6,7 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 19:01:01 by wdavey            #+#    #+#             */
-/*   Updated: 2023/12/04 19:35:07 by wdavey           ###   ########.fr       */
+/*   Updated: 2023/12/13 18:58:41 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ static const t_builtin	*get_builtins(void)
 		(t_builtin){"echo", &builtin_echo},
 		(t_builtin){"cd", &builtin_cd},
 		(t_builtin){"pwd", &builtin_pwd},
-		(t_builtin){"export", NULL},
+		(t_builtin){"export", &builtin_export},
 		(t_builtin){"unset", &builtin_unset},
-		(t_builtin){"env", NULL},
+		(t_builtin){"env", &builtin_env},
 		(t_builtin){"exit", NULL},
 		(t_builtin){NULL, NULL}
 	});

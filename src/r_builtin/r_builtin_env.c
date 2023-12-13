@@ -1,34 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   r_builtin_pwd.c                                    :+:      :+:    :+:   */
+/*   r_builtin_env.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/04 16:44:28 by wdavey            #+#    #+#             */
-/*   Updated: 2023/12/05 18:30:17 by wdavey           ###   ########.fr       */
+/*   Created: 2023/12/13 19:00:40 by wdavey            #+#    #+#             */
+/*   Updated: 2023/12/13 19:03:02 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <unistd.h>
-#include <stdlib.h>
 #include "r_builtin.h"
 #include "libft.h"
+#include <stdio.h>
 
-int	builtin_pwd(t_command cmd)
+int	builtin_env(t_command cmd)
 {
-	char	*buf;
+	int	i;
 
-	(void)cmd;
-	buf = getcwd(NULL, 0);
-	if (buf != NULL)
+	i = 0;
+	while ((*cmd.envp)[i])
 	{
-		write(cmd.fd[FD_OUT], &buf, ft_strlen(buf));
-		write(cmd.fd[FD_OUT], "\n", 1);
+		ft_putendl_fd((*cmd.envp)[i], cmd.fd[FD_OUT]);
+		i++;
 	}
-	else
-		perror("pwd");
-	free(buf);
 	return (0);
 }

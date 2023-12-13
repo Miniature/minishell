@@ -6,7 +6,7 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 18:10:56 by wdavey            #+#    #+#             */
-/*   Updated: 2023/12/05 18:32:38 by wdavey           ###   ########.fr       */
+/*   Updated: 2023/12/13 19:55:06 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,63 +19,9 @@
 #include "command.h"
 #include "libft.h"
 #include "str.h"
-#include "parse.h"
+//#include "parse.h"
 
 t_signal	g_signal;
-
-void	main_debug(int argc, char **argv, char ***envp)
-{
-	char	**tokens;
-	size_t	iii;
-
-	(void)argc;
-	(void)argv;
-	//test set/get env
-	printf("%s\n", ms_getenv(envp, "USER"));
-	ms_setenv(envp, ft_strdup("USER=NONE"));
-	printf("%s\n", ms_getenv(envp, "USER"));
-	printf("%s\n", ms_getenv(envp, "ASDASD"));
-	ms_setenv(envp, ft_strdup("ASDASD=NONE"));
-	printf("%s\n", ms_getenv(envp, "ASDASD"));
-	//test exec, builtins
-	exec_command((t_command){(char *[]){"unset", "ASDASD", NULL}, envp,
-	{0, 1}});
-	printf("%s\n", ms_getenv(envp, "ASDASD"));
-	exec_command((t_command)
-	{
-		(char *[]){
-		"echo", "dshfjsd", "aaaaaa", NULL
-		},
-		envp,
-		{0, 1}
-	});
-	exec_command((t_command){(char *[]){"noneshjsjkfkjsj", NULL}, envp, {0, 1}});
-	//test tokenizer
-	printf("tokenize\n");
-	tokens = tokenize_input("arg0 $PATH $ASDASD \"arg2 arg2 arg2\" arg3>arg5",
-			envp);
-	iii = -1;
-	while (NULL != tokens[++iii])
-	{
-		printf("%lu %s\n", iii, tokens[iii]);
-	}
-	//test parser
-	printf("parse\n");
-	t_list	*cmds = build_commands(tokens, envp);
-	iii = -1;
-	t_command	*cmd = (t_command*)cmds->content;
-	while (NULL != ((t_command *)cmds->content)->argv[++iii])
-	{
-		char	*arg = cmd->argv[iii];
-		(void)arg;
-		printf("%lu %s\n", iii, ((t_command *)cmds->content)->argv[iii]);
-		fflush(stdout);
-	}
-	free_all(tokens);
-	tokens = tokenize_input("echo \"test string->exec chain\"", envp);
-	cmds = build_commands(tokens, envp);
-	exec_command(*(t_command *)cmds->content);
-}
 
 //envp gets edited, so it needs to not be in static memory
 static char	**copy_envp(char **envp)
@@ -95,6 +41,75 @@ static char	**copy_envp(char **envp)
 		size--;
 	}
 	return (copy);
+}
+
+void	main_debug(int argc, char **argv, char ***envp)
+{
+
+	(void)argc;
+	(void)argv;
+	printf("%s\n", ms_getenv(envp, "PATH"));
+	ms_setenv(envp, ft_strdup("PATH=NONE"));
+	printf("%s\n", ms_getenv(envp, "PATH"));
+	printf("%s\n", ms_getenv(envp, "ASDASD"));
+	ms_setenv(envp, ft_strdup("ASDASD=NONE"));
+	printf("%s\n", ms_getenv(envp, "ASDASD"));
+	exec_command((t_command){(char *[]){"unset", "ASDASD", NULL}, envp,
+	{0, 1}});
+	printf("%s\n", ms_getenv(envp, "ASDASD"));
+	/*
+	char	**tokens;
+	size_t	iii;
+	printf("tokenize\n");
+	tokens = tokenize_input("arg0 $PATH $ASDASD \"arg2 arg2 arg2\" arg3>arg5",
+			envp);
+	iii = -1;
+	while (NULL != tokens[++iii])
+	{
+		printf("%lu %s\n", iii, tokens[iii]);
+		free(tokens[iii]);
+	}
+	printf("parse\n");
+	t_list	*cmds = build_commands(tokens, envp);
+	iii = -1;
+	t_command	*cmd = (t_command*)cmds->content;
+	while (NULL != ((t_command *)cmds->content)->argv[++iii])
+	{
+		char	*arg = cmd->argv[iii];
+		(void)arg;
+		printf("%lu %s\n", iii, ((t_command *)cmds->content)->argv[iii]);
+		fflush(stdout);
+	}
+	free(tokens);
+	tokens = tokenize_input("echo \"test string->exec chain\"", envp);
+	cmds = build_commands(tokens, envp);
+	exec_command(*(t_command *)cmds->content);
+	free_all(tokens);
+	*/
+	exec_command((t_command)
+	{
+		(char *[]){
+			"echo", "dshfjsd", "aaaaaa", NULL
+		},
+		envp,
+		{0, 1}
+	});
+	exec_command((t_command)
+	{
+		(char *[]){
+			"export", ft_strdup("TESTAHSJ=TEST"), NULL
+		},
+		envp,
+		{0, 1}
+	});
+	exec_command((t_command)
+	{
+		(char *[]){
+			"env", NULL
+		},
+		envp,
+		{0, 1}
+	});
 }
 
 int	main(int argc, char **argv, char **envp)

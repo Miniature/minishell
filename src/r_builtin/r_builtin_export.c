@@ -1,34 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   r_builtin_pwd.c                                    :+:      :+:    :+:   */
+/*   r_builtin_export.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/04 16:44:28 by wdavey            #+#    #+#             */
-/*   Updated: 2023/12/05 18:30:17 by wdavey           ###   ########.fr       */
+/*   Created: 2023/12/13 19:00:57 by wdavey            #+#    #+#             */
+/*   Updated: 2023/12/13 19:00:57 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <unistd.h>
-#include <stdlib.h>
 #include "r_builtin.h"
+#include "env.h"
 #include "libft.h"
 
-int	builtin_pwd(t_command cmd)
+int	builtin_export(t_command cmd)
 {
-	char	*buf;
+	int	i;
 
-	(void)cmd;
-	buf = getcwd(NULL, 0);
-	if (buf != NULL)
+	if (cmd.argv[1] == NULL)
 	{
-		write(cmd.fd[FD_OUT], &buf, ft_strlen(buf));
-		write(cmd.fd[FD_OUT], "\n", 1);
+		i = 0;
+		while ((*cmd.envp)[i])
+		{
+			ft_putendl_fd((*cmd.envp)[i], cmd.fd[FD_OUT]);
+			i++;
+		}
 	}
 	else
-		perror("pwd");
-	free(buf);
+	{
+		i = 1;
+		while (cmd.argv[i])
+		{
+			ms_setenv(cmd.envp, cmd.argv[i]);
+			i++;
+		}
+	}
 	return (0);
 }

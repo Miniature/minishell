@@ -6,7 +6,7 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 16:50:04 by wdavey            #+#    #+#             */
-/*   Updated: 2023/12/04 20:02:31 by wdavey           ###   ########.fr       */
+/*   Updated: 2023/12/05 18:37:54 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "libft.h"
 #include "str.h"
 #include <stdbool.h>
-#include <stdio.h>.
+#include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
 
@@ -52,7 +52,7 @@ void	ms_setenv(char ***envp, char *value)
 	equal = ft_strchr(value, '=');
 	if (equal == NULL)
 	{
-		write(stderr, "Error: Invalid Environment Variable\n", 36);
+		write(STDERR_FILENO, "Error: Invalid Environment Variable\n", 36);
 		return ;
 	}
 	name_length = equal - value;
@@ -77,8 +77,8 @@ void	ms_unsetenv(char ***envp, char *name)
 	new_env = realloc(env, i * sizeof(char *));
 	if (new_env == NULL)
 	{
-		write(stderr, "Failed to reallocate memory ", 28);
-		write(stderr, "while unsetting environment variable.\n", 38);
+		write(STDERR_FILENO, "Failed to reallocate memory ", 28);
+		write(STDERR_FILENO, "while unsetting environment variable.\n", 38);
 		return ;
 	}
 	*envp = new_env;
