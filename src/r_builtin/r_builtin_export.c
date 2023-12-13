@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   r_builtin_export.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/12/13 19:00:57 by wdavey            #+#    #+#             */
+/*   Updated: 2023/12/13 19:00:57 by wdavey           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "r_builtin.h"
 #include "env.h"
 #include "libft.h"
@@ -9,9 +21,9 @@ int	builtin_export(t_command cmd)
 	if (cmd.argv[1] == NULL)
 	{
 		i = 0;
-		while ((*cm.envp)[i])
+		while ((*cmd.envp)[i])
 		{
-			ft_putendl_fd((*cmd.envp)[i], cmd.fd[FD_OUT);
+			ft_putendl_fd((*cmd.envp)[i], cmd.fd[FD_OUT]);
 			i++;
 		}
 	}

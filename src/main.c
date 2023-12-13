@@ -6,7 +6,7 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 18:10:56 by wdavey            #+#    #+#             */
-/*   Updated: 2023/12/05 18:38:56 by wdavey           ###   ########.fr       */
+/*   Updated: 2023/12/13 19:04:04 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,10 +74,26 @@ void	main_debug(int argc, char **argv, char ***envp)
 	exec_command((t_command)
 	{
 		(char *[]){
-		"echo", "dshfjsd", "aaaaaa", NULL
-	},
+			"echo", "dshfjsd", "aaaaaa", NULL
+		},
 		envp,
-	{0, 1}
+		{0, 1}
+	});
+	exec_command((t_command)
+	{
+		(char *[]){
+			"export", ft_strdup("TESTAHSJ=TEST"), NULL
+		},
+		envp,
+		{0, 1}
+	});
+	exec_command((t_command)
+	{
+		(char *[]){
+			"env", NULL
+		},
+		envp,
+		{0, 1}
 	});
 }
 
