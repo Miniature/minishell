@@ -6,7 +6,7 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 18:10:56 by wdavey            #+#    #+#             */
-/*   Updated: 2023/12/13 19:55:06 by wdavey           ###   ########.fr       */
+/*   Updated: 2023/12/13 20:06:33 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 #include "command.h"
 #include "libft.h"
 #include "str.h"
-//#include "parse.h"
+#include "parse.h"
 
 t_signal	g_signal;
 
@@ -57,7 +57,6 @@ void	main_debug(int argc, char **argv, char ***envp)
 	exec_command((t_command){(char *[]){"unset", "ASDASD", NULL}, envp,
 	{0, 1}});
 	printf("%s\n", ms_getenv(envp, "ASDASD"));
-	/*
 	char	**tokens;
 	size_t	iii;
 	printf("tokenize\n");
@@ -67,7 +66,6 @@ void	main_debug(int argc, char **argv, char ***envp)
 	while (NULL != tokens[++iii])
 	{
 		printf("%lu %s\n", iii, tokens[iii]);
-		free(tokens[iii]);
 	}
 	printf("parse\n");
 	t_list	*cmds = build_commands(tokens, envp);
@@ -80,12 +78,13 @@ void	main_debug(int argc, char **argv, char ***envp)
 		printf("%lu %s\n", iii, ((t_command *)cmds->content)->argv[iii]);
 		fflush(stdout);
 	}
-	free(tokens);
+	ft_lstclear(&cmds, (void(*)(void *))&command_free);
+	free_all(tokens);
 	tokens = tokenize_input("echo \"test string->exec chain\"", envp);
 	cmds = build_commands(tokens, envp);
 	exec_command(*(t_command *)cmds->content);
 	free_all(tokens);
-	*/
+	ft_lstclear(&cmds, (void(*)(void *))&command_free);
 	exec_command((t_command)
 	{
 		(char *[]){
