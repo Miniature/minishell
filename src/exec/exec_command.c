@@ -6,7 +6,7 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 19:01:01 by wdavey            #+#    #+#             */
-/*   Updated: 2023/12/13 20:28:26 by wdavey           ###   ########.fr       */
+/*   Updated: 2023/12/18 07:35:18 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	exec_command(t_command cmd)
 		pid = exec_command_external(cmd);
 	if (STDIN_FILENO != cmd.fd[FD_IN])
 		close(cmd.fd[FD_IN]);
-	if (STDIN_FILENO != cmd.fd[FD_OUT])
+	if (STDOUT_FILENO != cmd.fd[FD_OUT])
 		close(cmd.fd[FD_OUT]);
 	return (pid);
 }
