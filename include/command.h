@@ -6,7 +6,7 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 14:00:46 by wdavey            #+#    #+#             */
-/*   Updated: 2023/12/05 14:47:51 by wdavey           ###   ########.fr       */
+/*   Updated: 2023/12/13 20:53:31 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,13 @@ typedef struct s_command
 	int		fd[2];
 }	t_command;
 
-int		exec_command(t_command cmd);
-int		exec_command_builtin(t_command cmd, int (*f)(t_command));
+int			exec_command(t_command cmd);
+int			exec_command_builtin(t_command cmd, int (*f)(t_command));
 //for non-builtins
-int		exec_command_external(t_command cmd);
-char	*resolve_path(t_command cmd);
+int			exec_command_external(t_command cmd);
+char		*resolve_path(t_command cmd);
 
-void	command_free(t_command *cmd);
+t_command	*command_new(char ***envp);
+void		command_free(t_command *cmd);
 
 #endif

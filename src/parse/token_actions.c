@@ -6,7 +6,7 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 16:21:34 by wdavey            #+#    #+#             */
-/*   Updated: 2023/12/05 16:37:38 by wdavey           ###   ########.fr       */
+/*   Updated: 2023/12/13 21:01:46 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,14 @@
 #include <unistd.h>
 #include <fcntl.h>
 #include "command.h"
+#include <stdio.h>
+
+size_t	token_unexpected(char **args, t_command *command)
+{
+	(void)command;
+	printf("minishell: syntax error near unexpected token: %s\n", *args);
+	return (-1);
+}
 
 //heredoc
 size_t	token_2lt(char **args, t_command *command)

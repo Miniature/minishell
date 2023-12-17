@@ -6,7 +6,7 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 18:10:56 by wdavey            #+#    #+#             */
-/*   Updated: 2023/12/13 20:06:33 by wdavey           ###   ########.fr       */
+/*   Updated: 2023/12/18 07:54:28 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,17 @@ static char	**copy_envp(char **envp)
 	return (copy);
 }
 
+static void	test_stack(char *input, char ***envp)
+{
+	char	**tokens;
+	t_list	*cmds;
+
+	tokens = tokenize_input(input, envp);
+	cmds = build_commands(tokens, envp);
+	free_all(tokens);
+	ft_lstclear(&cmds, (void (*)(void *)) & command_free);
+}
+
 void	main_debug(int argc, char **argv, char ***envp)
 {
 
@@ -60,7 +71,7 @@ void	main_debug(int argc, char **argv, char ***envp)
 	char	**tokens;
 	size_t	iii;
 	printf("tokenize\n");
-	tokens = tokenize_input("arg0 $PATH $ASDASD \"arg2 arg2 arg2\" arg3>arg5",
+	tokens = tokenize_input("arg0 $PATH $ASDASD \"arg2 arg2 arg2\" arg3>arg5.tmp",
 			envp);
 	iii = -1;
 	while (NULL != tokens[++iii])
@@ -109,6 +120,7 @@ void	main_debug(int argc, char **argv, char ***envp)
 		envp,
 		{0, 1}
 	});
+	test_stack("echo a | cat", envp);
 }
 
 int	main(int argc, char **argv, char **envp)
