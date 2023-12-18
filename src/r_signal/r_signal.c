@@ -13,7 +13,7 @@
 #include "r_signal.h"
 #include <unistd.h>
 
-int	g_signal;
+//int	g_signal; Commented because it's already in main.c
 
 //move to libft
 void	*ft_memdel(void *ptr)

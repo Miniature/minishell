@@ -21,7 +21,7 @@
 #include "str.h"
 #include "parse.h"
 
-t_signal	g_signal;
+int	g_signal;
 
 //envp gets edited, so it needs to not be in static memory
 static char	**copy_envp(char **envp)
