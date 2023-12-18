@@ -13,13 +13,16 @@ FILES:=\
 	exec/exec_command\
 	exec/exec_command_builtin\
 	exec/exec_command_external\
+	parse/parse\
 	parse/tokenize\
+	parse/token_actions\
 	r_builtin/r_builtin_cd\
 	r_builtin/r_builtin_echo\
 	r_builtin/r_builtin_pwd\
 	r_builtin/r_builtin_unset\
 	r_builtin/r_builtin_env\
 	r_builtin/r_builtin_export\
+	r_builtin/r_builtin_exit\
 	str/str_add\
 	str/str_has_all\
 	str/str_has_any\
@@ -28,6 +31,7 @@ FILES:=\
 	utils/ft_realloc\
 	array_append\
 	array_last\
+	command\
 	main\
 	resolve_path\
 

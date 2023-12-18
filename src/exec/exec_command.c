@@ -6,7 +6,7 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 19:01:01 by wdavey            #+#    #+#             */
-/*   Updated: 2023/12/04 19:35:07 by wdavey           ###   ########.fr       */
+/*   Updated: 2023/12/18 07:43:22 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "libft.h"
 #include "r_builtin.h"
 #include "exec.h"
+#include <unistd.h>
 
 //last is NULL NULL
 static const t_builtin	*get_builtins(void)
@@ -22,9 +23,9 @@ static const t_builtin	*get_builtins(void)
 		(t_builtin){"echo", &builtin_echo},
 		(t_builtin){"cd", &builtin_cd},
 		(t_builtin){"pwd", &builtin_pwd},
-		(t_builtin){"export", NULL},
+		(t_builtin){"export", &builtin_export},
 		(t_builtin){"unset", &builtin_unset},
-		(t_builtin){"env", NULL},
+		(t_builtin){"env", &builtin_env},
 		(t_builtin){"exit", NULL},
 		(t_builtin){NULL, NULL}
 	});
@@ -33,14 +34,22 @@ static const t_builtin	*get_builtins(void)
 int	exec_command(t_command cmd)
 {
 	size_t	iii;
+	int		pid;
 
 	iii = -1;
 	while (get_builtins()[++iii].name != NULL)
 	{
 		if (ft_strncmp(cmd.argv[0], get_builtins()[iii].name, -1) == 0)
 		{
-			return (exec_command_builtin(cmd, get_builtins()[iii].function));
+			pid = exec_command_builtin(cmd, get_builtins()[iii].function);
+			break ;
 		}
 	}
-	return (exec_command_external(cmd));
+	if (get_builtins()[iii].name == NULL)
+		pid = exec_command_external(cmd);
+	if (STDIN_FILENO != cmd.fd[FD_IN])
+		close(cmd.fd[FD_IN]);
+	if (STDOUT_FILENO != cmd.fd[FD_OUT])
+		close(cmd.fd[FD_OUT]);
+	return (pid);
 }
