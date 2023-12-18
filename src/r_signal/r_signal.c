@@ -41,4 +41,8 @@ void	signal_handler(int input_code)
 		rl_redisplay();
 		g_signal = _SIGINTERUPT;
 	}
+	else if (input_code == SIGQUIT)
+	{
+		g_signal = _SIGEXIT;
+	}
 }
