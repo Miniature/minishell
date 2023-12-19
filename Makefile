@@ -32,6 +32,7 @@ FILES:=\
 	array_append\
 	array_last\
 	command\
+	engine\
 	main\
 	resolve_path\
 
@@ -65,7 +66,7 @@ bonus: OBJ_FILES=$(OBJ_FILES_BONUS)
 bonus: all
 
 $(NAME): $(SLIBPATHS) $(DYLIBPATHS) $(OBJ_FILES) $(OBJ_FILES_BONUS)
-	cc -o $(NAME) $(OBJ_FILES) $(dir $(addprefix -L./, $(SLIBPATHS))) $(addprefix -l, $(SLIBS)) $(dir $(addprefix -L./, $(DYLIBPATHS))) $(addprefix -l, $(DYLIBS))
+	cc -o $(NAME) $(OBJ_FILES) $(dir $(addprefix -L./, $(SLIBPATHS))) $(addprefix -l, $(SLIBS)) $(dir $(addprefix -L./, $(DYLIBPATHS))) $(addprefix -l, $(DYLIBS)) -L/usr/local/opt/readline/lib/ -lreadline
 	$(foreach dylib, $(DYLIBPATHS), cp $(dylib) .)
 	$(foreach dylib, $(DYLIBPATHS), install_name_tool -change $(notdir $(dylib)) @executable_path/$(notdir $(dylib)) $(NAME)$(NEWLINE))
 #i hate macs
@@ -74,7 +75,7 @@ $(NAME): $(SLIBPATHS) $(DYLIBPATHS) $(OBJ_FILES) $(OBJ_FILES_BONUS)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@mkdir -p $(dir $@)
-	cc $(CFLAGS) -o $@ $< $(INCLUDES)
+	cc $(CFLAGS) -o $@ $< $(INCLUDES) -I/usr/local/opt/readline/include/
 
 %.a:
 	$(MAKE) -C $(dir $@)

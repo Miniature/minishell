@@ -6,7 +6,7 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 18:10:56 by wdavey            #+#    #+#             */
-/*   Updated: 2023/12/18 07:54:28 by wdavey           ###   ########.fr       */
+/*   Updated: 2023/12/19 10:56:12 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,12 @@
 #include "libft.h"
 #include "str.h"
 #include "parse.h"
+#include "readline/readline.h"
+#include "readline/history.h"
 
 t_signal	g_signal;
+
+int	engine(char ***envp);
 
 //envp gets edited, so it needs to not be in static memory
 static char	**copy_envp(char **envp)
@@ -43,17 +47,7 @@ static char	**copy_envp(char **envp)
 	return (copy);
 }
 
-static void	test_stack(char *input, char ***envp)
-{
-	char	**tokens;
-	t_list	*cmds;
-
-	tokens = tokenize_input(input, envp);
-	cmds = build_commands(tokens, envp);
-	free_all(tokens);
-	ft_lstclear(&cmds, (void (*)(void *)) & command_free);
-}
-
+/*
 void	main_debug(int argc, char **argv, char ***envp)
 {
 
@@ -120,14 +114,16 @@ void	main_debug(int argc, char **argv, char ***envp)
 		envp,
 		{0, 1}
 	});
-	test_stack("echo a | cat", envp);
 }
+*/
 
 int	main(int argc, char **argv, char **envp)
 {
 	char	*shlvl;
 	char	**env;
 
+	(void)argc;
+	(void)argv;
 	env = copy_envp(envp);
 	shlvl = ms_getenv(&env, "SHLVL");
 	if (NULL == shlvl)
@@ -139,7 +135,10 @@ int	main(int argc, char **argv, char **envp)
 				shlvl)->cstr);
 		free(shlvl);
 	}
-	main_debug(argc, argv, &env);
+	//main_debug(argc, argv, &env);
+	engine(&env);
 	free_all(env);
+	rl_clear_history();
+	printf("exit\n");
 	return (0);
 }
