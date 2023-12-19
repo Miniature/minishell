@@ -6,7 +6,7 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 14:41:36 by wdavey            #+#    #+#             */
-/*   Updated: 2023/12/04 19:05:35 by wdavey           ###   ########.fr       */
+/*   Updated: 2023/12/19 10:29:55 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,16 +41,15 @@ int	exec_command_external(t_command cmd)
 	char	*cmd_path;
 	pid_t	pid;
 
+	ms_setenv(cmd.envp, ft_strjoin("_=", cmd.argv[0]));
 	cmd_path = resolve_path(cmd);
 	if (cmd_path == NULL)
 	{
 		write(2, "minishell: command not found: ", 31);
 		write(2, cmd.argv[0], ft_strlen(cmd.argv[0]));
 		write(2, "\n", 1);
-		ms_setenv(cmd.envp, ft_strjoin("_=", cmd.argv[0]));
 		return (-1);
 	}
-	ms_setenv(cmd.envp, ft_strjoin("_=", cmd_path));
 	pid = fork();
 	if (pid == -1)
 		perror("minishell: exec");
