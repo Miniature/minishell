@@ -132,6 +132,8 @@ int	main(int argc, char **argv, char **envp)
 	shlvl = ms_getenv(&env, "SHLVL");
 	if (NULL == shlvl)
 		ms_setenv(&env, "SHLVL=1");
+	signal(SIGINT, signal_handler);
+	signal(SIGQUIT, signal_handler);
 	else
 	{
 		shlvl = ft_itoa(ft_atoi(ft_strchr(shlvl, '=') + 1) + 1);
