@@ -23,7 +23,7 @@
 #include "readline/readline.h"
 #include "readline/history.h"
 
-t_signal	g_signal;
+int	g_signal;
 
 int	engine(char ***envp);
 

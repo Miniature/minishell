@@ -15,6 +15,7 @@
 
 # include "libft.h"
 # include <signal.h>
+# include <unistd.h>
 
 typedef enum e_signalStatus
 {
@@ -27,7 +28,7 @@ typedef enum e_signalStatus
 typedef struct s_signal
 {
 	t_signalStatus			signal;
-	int						pid;
+	pid_t					pid;
 	int						exit_code;
 }	t_signal;
 

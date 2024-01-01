@@ -13,7 +13,7 @@
 #include "r_signal.h"
 #include <unistd.h>
 
-int	g_signal;
+//int	g_signal; Commented because it's already in main.c
 
 //move to libft
 void	*ft_memdel(void *ptr)
@@ -40,5 +40,9 @@ void	signal_handler(int input_code)
 		rl_on_new_line();
 		rl_redisplay();
 		g_signal = _SIGINTERUPT;
+	}
+	else if (input_code == SIGQUIT)
+	{
+		g_signal = _SIGEXIT;
 	}
 }
