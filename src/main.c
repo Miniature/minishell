@@ -6,7 +6,7 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 18:10:56 by wdavey            #+#    #+#             */
-/*   Updated: 2023/12/19 10:56:12 by wdavey           ###   ########.fr       */
+/*   Updated: 2024/01/01 11:02:25 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,8 +128,6 @@ int	main(int argc, char **argv, char **envp)
 	shlvl = ms_getenv(&env, "SHLVL");
 	if (NULL == shlvl)
 		ms_setenv(&env, "SHLVL=1");
-	signal(SIGINT, signal_handler);
-	signal(SIGQUIT, signal_handler);
 	else
 	{
 		shlvl = ft_itoa(ft_atoi(ft_strchr(shlvl, '=') + 1) + 1);
@@ -137,6 +135,8 @@ int	main(int argc, char **argv, char **envp)
 				shlvl)->cstr);
 		free(shlvl);
 	}
+	signal(SIGINT, signal_handler);
+	signal(SIGQUIT, signal_handler);
 	//main_debug(argc, argv, &env);
 	engine(&env);
 	free_all(env);

@@ -23,6 +23,7 @@ FILES:=\
 	r_builtin/r_builtin_env\
 	r_builtin/r_builtin_export\
 	r_builtin/r_builtin_exit\
+	r_signal/r_signal\
 	str/str_add\
 	str/str_has_all\
 	str/str_has_any\
