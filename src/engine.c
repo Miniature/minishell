@@ -18,6 +18,7 @@
 #include "command.h"
 #include "libft.h"
 #include "env.h"
+#include "str.h"
 #include "readline/readline.h"
 
 static void	engine_run(t_list *cmds, char ***envp)
@@ -69,8 +70,8 @@ int	engine(char ***envp)
 			input = readline("minishell> ");
 		tokens = tokenize_input(input, envp);
 		cmds = build_commands(tokens, envp);
-		if (cmds && !cmds->next
-			&& !ft_strncmp(((t_command *)cmds->content)->argv[0], "exit", -1))
+		if (cmds && !cmds->next && (!ft_strnequ(ms_getenv(envp, "exit"), "exit=0", 6)))
+			//&& !ft_strncmp(((t_command *)cmds->content)->argv[0], "exit", -1))
 			break ;
 		engine_run(cmds, envp);
 		engine_cleanup(input, tokens, cmds);

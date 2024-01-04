@@ -14,8 +14,12 @@
 # define R_SIGNAL_H
 
 # include "libft.h"
+# include <stdio.h>
 # include <signal.h>
 # include <unistd.h>
+# include <stdlib.h>
+# include <readline/readline.h>
+# include <readline/history.h>
 
 typedef enum e_signalStatus
 {

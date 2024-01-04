@@ -26,7 +26,7 @@ static const t_builtin	*get_builtins(void)
 		(t_builtin){"export", &builtin_export},
 		(t_builtin){"unset", &builtin_unset},
 		(t_builtin){"env", &builtin_env},
-		(t_builtin){"exit", NULL},
+		(t_builtin){"exit", &builtin_exit},
 		(t_builtin){NULL, NULL}
 	});
 }

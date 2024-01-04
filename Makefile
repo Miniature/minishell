@@ -67,7 +67,7 @@ bonus: OBJ_FILES=$(OBJ_FILES_BONUS)
 bonus: all
 
 $(NAME): $(SLIBPATHS) $(DYLIBPATHS) $(OBJ_FILES) $(OBJ_FILES_BONUS)
-	cc -o $(NAME) $(OBJ_FILES) $(dir $(addprefix -L./, $(SLIBPATHS))) $(addprefix -l, $(SLIBS)) $(dir $(addprefix -L./, $(DYLIBPATHS))) $(addprefix -l, $(DYLIBS)) -L/usr/local/opt/readline/lib/ -lreadline
+	cc -o $(NAME) $(OBJ_FILES) $(dir $(addprefix -L./, $(SLIBPATHS))) $(addprefix -l, $(SLIBS)) $(dir $(addprefix -L./, $(DYLIBPATHS))) $(addprefix -l, $(DYLIBS)) -L/usr/local/Cellar/readline/8.1.2/lib/ -lreadline #L/usr/local/opt/readline/lib/ -lreadline
 	$(foreach dylib, $(DYLIBPATHS), cp $(dylib) .)
 	$(foreach dylib, $(DYLIBPATHS), install_name_tool -change $(notdir $(dylib)) @executable_path/$(notdir $(dylib)) $(NAME)$(NEWLINE))
 #i hate macs
@@ -76,7 +76,7 @@ $(NAME): $(SLIBPATHS) $(DYLIBPATHS) $(OBJ_FILES) $(OBJ_FILES_BONUS)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@mkdir -p $(dir $@)
-	cc $(CFLAGS) -o $@ $< $(INCLUDES) -I/usr/local/opt/readline/include/
+	cc $(CFLAGS) -o $@ $< $(INCLUDES) -I/usr/local/Cellar/readline/8.1.2/include/ #-I/usr/local/opt/readline/include/
 
 %.a:
 	$(MAKE) -C $(dir $@)

@@ -135,6 +135,7 @@ int	main(int argc, char **argv, char **envp)
 				shlvl)->cstr);
 		free(shlvl);
 	}
+	ms_setenv(&env, "exit=0");
 	signal(SIGINT, signal_handler);
 	signal(SIGQUIT, signal_handler);
 	//main_debug(argc, argv, &env);
