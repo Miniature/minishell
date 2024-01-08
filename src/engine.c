@@ -6,7 +6,7 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 09:33:09 by wdavey            #+#    #+#             */
-/*   Updated: 2023/12/19 10:56:03 by wdavey           ###   ########.fr       */
+/*   Updated: 2024/01/01 12:06:29 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,16 @@
 #include "env.h"
 #include "str.h"
 #include "readline/readline.h"
+#include "readline/history.h"
+
+static char	*get_input(void)
+{
+	char	*input;
+
+	input = readline("minishell> ");
+	add_history(input);
+	return (input);
+}
 
 static void	engine_run(t_list *cmds, char ***envp)
 {
@@ -37,8 +47,7 @@ static void	engine_run(t_list *cmds, char ***envp)
 	stat_loc = 0;
 	if (0 < last)
 	{
-		while (!stat_loc)
-			waitpid(last, &stat_loc, 0);
+		waitpid(last, &stat_loc, 0);
 	}
 	else
 		stat_loc = 127 << 8;
@@ -58,16 +67,16 @@ static void	engine_cleanup(char *input, char **tokens, t_list *cmds)
 
 int	engine(char ***envp)
 {
-	char	*input;
-	char	**tokens;
-	t_list	*cmds;
-	int		rval;
+	char			*input;
+	char			**tokens;
+	t_list			*cmds;
+	int				rval;
 
 	while (true)
 	{
 		input = NULL;
 		while (!input || !ft_strlen(input))
-			input = readline("minishell> ");
+			input = get_input();
 		tokens = tokenize_input(input, envp);
 		cmds = build_commands(tokens, envp);
 		if (cmds && !cmds->next && (!ft_strnequ(ms_getenv(envp, "exit"), "exit=0", 6)))
