@@ -14,6 +14,7 @@ FILES:=\
 	exec/exec_command\
 	exec/exec_command_builtin\
 	exec/exec_command_external\
+	parse/parse_utils\
 	parse/parse\
 	parse/tokenize\
 	parse/token_actions\

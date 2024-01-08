@@ -6,7 +6,7 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 16:47:41 by wdavey            #+#    #+#             */
-/*   Updated: 2023/12/05 18:00:21 by wdavey           ###   ########.fr       */
+/*   Updated: 2024/01/08 14:51:30 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,9 @@
 #include "str.h"
 #include "env.h"
 #include "utils.h"
+#include <unistd.h>
+
+bool	is_meta_char(char c);
 
 static size_t	single_quote(char *str, t_string *current)
 {
@@ -49,19 +52,6 @@ static size_t	insert_env(char *str, char ***envp, t_string *current)
 	return (rval);
 }
 
-bool	is_meta_char(char c)
-{
-	return (
-		c == ' '
-		|| c == '>'
-		|| c == '<'
-		|| c == '|'
-		|| c == '('
-		|| c == ')'
-		|| c == '&'
-	);
-}
-
 static size_t	tokenize_step(char *str, char ***arglist, t_string *current)
 {
 	size_t		iii;
@@ -90,6 +80,30 @@ static size_t	tokenize_step(char *str, char ***arglist, t_string *current)
 	return (0);
 }
 
+#define NOHOME "minishell: HOME is not defined\n"
+
+static size_t	home(char *str, t_string *current, char ***envp)
+{
+	char	*value;
+
+	if ('\0' != str[1] && ' ' != str[1])
+	{
+		string_addchar(current, '~');
+	}
+	else
+	{
+		value = ms_getenv_value(envp, "HOME");
+		if (NULL == value)
+		{
+			write(STDERR_FILENO, NOHOME, ft_strlen(NOHOME));
+			string_addchar(current, '~');
+		}
+		else
+			string_addcstr(current, value);
+	}
+	return (0);
+}
+
 char	**tokenize_input(char *str, char ***envp)
 {
 	char		**arglist;
@@ -105,9 +119,8 @@ char	**tokenize_input(char *str, char ***envp)
 			iii += single_quote(str + iii, &arg);
 		else if (str[iii] == '$')
 			iii += insert_env(str + iii + 1, envp, &arg);
-		else if ('~' == str[iii] && (0 == iii || ' ' == str[iii - 1])
-			&& ms_getenv(envp, "HOME"))
-			string_addcstr(&arg, ms_getenv(envp, "HOME"));
+		else if ('~' == str[iii] && (0 == iii || ' ' == str[iii - 1]))
+			iii += home(str + iii, &arg, envp);
 		else
 			iii += tokenize_step(str + iii, &arglist, &arg);
 	}
