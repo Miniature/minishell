@@ -6,7 +6,7 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 18:37:29 by wdavey            #+#    #+#             */
-/*   Updated: 2024/01/08 14:30:50 by wdavey           ###   ########.fr       */
+/*   Updated: 2024/01/08 14:49:34 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 #include "libft.h"
 #include <stdlib.h>
 
-#define NOHOME "minishell: HOME is not set"
+#define NOHOME "minishell: HOME is not set\n"
 
 int	builtin_cd(t_command cmd)
 {
