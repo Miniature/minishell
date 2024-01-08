@@ -6,7 +6,7 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 09:33:09 by wdavey            #+#    #+#             */
-/*   Updated: 2024/01/01 12:06:29 by wdavey           ###   ########.fr       */
+/*   Updated: 2024/01/08 14:05:19 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,8 @@ int	engine(char ***envp)
 			input = get_input();
 		tokens = tokenize_input(input, envp);
 		cmds = build_commands(tokens, envp);
-		if (cmds && !cmds->next && (!ft_strnequ(ms_getenv(envp, "exit"), "exit=0", 6)))
-			//&& !ft_strncmp(((t_command *)cmds->content)->argv[0], "exit", -1))
+		if (cmds && !cmds->next
+			&& !ft_strncmp(((t_command *)cmds->content)->argv[0], "exit", -1))
 			break ;
 		engine_run(cmds, envp);
 		engine_cleanup(input, tokens, cmds);

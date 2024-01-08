@@ -6,7 +6,7 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 18:10:56 by wdavey            #+#    #+#             */
-/*   Updated: 2024/01/01 11:02:25 by wdavey           ###   ########.fr       */
+/*   Updated: 2024/01/08 14:06:17 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,7 +135,7 @@ int	main(int argc, char **argv, char **envp)
 				shlvl)->cstr);
 		free(shlvl);
 	}
-	ms_setenv(&env, "exit=0");
+	//ms_setenv(&env, "exit=0");
 	signal(SIGINT, signal_handler);
 	signal(SIGQUIT, signal_handler);
 	//main_debug(argc, argv, &env);
