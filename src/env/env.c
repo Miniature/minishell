@@ -6,7 +6,7 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 16:50:04 by wdavey            #+#    #+#             */
-/*   Updated: 2023/12/05 18:37:54 by wdavey           ###   ########.fr       */
+/*   Updated: 2024/01/08 14:27:34 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,26 +18,6 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
-
-/* in "envp", find and return a pointer to the environment
-containing the input parameter "name". */
-char	*ms_getenv(char ***envp, char *name)
-{
-	char	**env;
-	int		i;
-	int		size;
-
-	i = 0;
-	env = *envp;
-	size = ft_strlen(name);
-	while (env[i])
-	{
-		if (!ft_strncmp(env[i], name, size) && env[i][size] == '=')
-			return (env[i]);
-		i++;
-	}
-	return (NULL);
-}
 
 /* in "envp", set an associated environment variable to "value" if it exists,
 or create a new environment variable at the end of "envp" by appending it to

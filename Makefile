@@ -9,6 +9,7 @@ export CFLAGS
 NAME:=minishell
 
 FILES:=\
+	env/env_get\
 	env/env\
 	exec/exec_command\
 	exec/exec_command_builtin\
