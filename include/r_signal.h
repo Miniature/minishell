@@ -6,7 +6,7 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 16:48:52 by wdavey            #+#    #+#             */
-/*   Updated: 2023/12/04 16:49:00 by wdavey           ###   ########.fr       */
+/*   Updated: 2024/01/08 14:53:59 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@
 # include <stdlib.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+
+extern int	g_signal;
 
 typedef enum e_signalStatus
 {
