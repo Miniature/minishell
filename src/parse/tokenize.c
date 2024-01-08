@@ -6,7 +6,7 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 16:47:41 by wdavey            #+#    #+#             */
-/*   Updated: 2024/01/08 14:51:30 by wdavey           ###   ########.fr       */
+/*   Updated: 2024/01/08 15:19:32 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,10 @@ static size_t	insert_env(char *str, char ***envp, t_string *current)
 
 	if (*str == '?')
 	{
-		string_addcstr(current, ms_getenv(envp, "?"));
+		if (ms_getenv_value(envp, "?") != NULL)
+			string_addcstr(current, ms_getenv_value(envp, "?"));
+		else
+			string_addcstr(current, "0");
 		return (1);
 	}
 	name = (t_string){ft_strdup(""), 1};
@@ -45,8 +48,7 @@ static size_t	insert_env(char *str, char ***envp, t_string *current)
 		string_addchar(&name, str[ft_strlen(name.cstr)]);
 	var = ms_getenv(envp, name.cstr);
 	if (var)
-		string_addcstr(current, ms_getenv(envp, name.cstr)
-			+ ft_strlen(name.cstr) + 1);
+		string_addcstr(current, ms_getenv_value(envp, name.cstr));
 	rval = ft_strlen(name.cstr);
 	string_del(&name);
 	return (rval);
