@@ -6,7 +6,7 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 09:33:09 by wdavey            #+#    #+#             */
-/*   Updated: 2024/01/01 11:37:00 by wdavey           ###   ########.fr       */
+/*   Updated: 2024/01/01 12:06:29 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,7 @@ static void	engine_run(t_list *cmds, char ***envp)
 	stat_loc = 0;
 	if (0 < last)
 	{
-		while (!stat_loc)
-			waitpid(last, &stat_loc, 0);
+		waitpid(last, &stat_loc, 0);
 	}
 	else
 		stat_loc = 127 << 8;
