@@ -6,7 +6,7 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 16:45:37 by wdavey            #+#    #+#             */
-/*   Updated: 2023/12/04 16:52:45 by wdavey           ###   ########.fr       */
+/*   Updated: 2024/01/08 14:58:19 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	signal_handler(int input_code)
 {
 	if (input_code == SIGINT)
 	{
-		write(STDERR_FILENO, "\n", 1);
+		write(STDOUT_FILENO, "\n", 1);
 		rl_replace_line("", 0);
 		rl_on_new_line();
 		rl_redisplay();
