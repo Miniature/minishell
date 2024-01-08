@@ -1,5 +1,6 @@
-.vscode
-*/.git
+.vscode/
+/.vs/
+*.tmp
 
 #generated on build
 *.a
@@ -8,5 +9,3 @@ bin/
 
 #project specific
 minishell
-/.vs
-*.tmp
