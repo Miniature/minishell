@@ -65,7 +65,7 @@ static void	engine_cleanup(char *input, char **tokens, t_list *cmds)
 	ft_lstclear(&cmds, (void (*)(void *)) & command_free);
 }
 
-int	engine(char ***envp)
+void	engine(char ***envp)
 {
 	char			*input;
 	char			**tokens;
