@@ -6,7 +6,7 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 19:00:57 by wdavey            #+#    #+#             */
-/*   Updated: 2023/12/13 19:00:57 by wdavey           ###   ########.fr       */
+/*   Updated: 2024/01/08 15:13:03 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	builtin_export(t_command cmd)
 		i = 1;
 		while (cmd.argv[i])
 		{
-			ms_setenv(cmd.envp, cmd.argv[i]);
+			ms_setenv(cmd.envp, ft_strdup(cmd.argv[i]));
 			i++;
 		}
 	}
