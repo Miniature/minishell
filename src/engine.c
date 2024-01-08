@@ -6,7 +6,7 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 09:33:09 by wdavey            #+#    #+#             */
-/*   Updated: 2024/01/08 14:53:36 by wdavey           ###   ########.fr       */
+/*   Updated: 2024/01/08 15:43:22 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 #include "str.h"
 #include "readline/readline.h"
 #include "readline/history.h"
+#include "r_signal.h"
 
 static char	*get_input(void)
 {
@@ -65,12 +66,20 @@ static void	engine_cleanup(char *input, char **tokens, t_list *cmds)
 	ft_lstclear(&cmds, (void (*)(void *)) & command_free);
 }
 
+static void	engine_signals(char ***envp)
+{
+	if (g_signal == _SIGEXIT)
+	{
+		printf("Quit: %s\n", ms_getenv_value(envp, "?"));
+	}
+	g_signal = _SIGOKAY;
+}
+
 void	engine(char ***envp)
 {
 	char			*input;
 	char			**tokens;
 	t_list			*cmds;
-	int				rval;
 
 	while (true)
 	{
@@ -84,10 +93,7 @@ void	engine(char ***envp)
 			break ;
 		engine_run(cmds, envp);
 		engine_cleanup(input, tokens, cmds);
+		engine_signals(envp);
 	}
-	rval = 0;
-	if (((t_command *)cmds->content)->argv[1])
-		rval = ft_atoi(((t_command *)cmds->content)->argv[1]);
 	engine_cleanup(input, tokens, cmds);
-	return (rval);
 }
