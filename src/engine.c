@@ -6,7 +6,7 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 09:33:09 by wdavey            #+#    #+#             */
-/*   Updated: 2024/01/09 15:58:17 by wdavey           ###   ########.fr       */
+/*   Updated: 2024/01/09 16:32:33 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ static void	engine_cleanup(char *input, char **tokens, t_list *cmds,
 	}
 	if (envp != NULL && g_signal == _SIGEXIT)
 	{
-		printf("Quit: %s\n", ms_getenv_value(envp, "?"));
+		printf("Quit: 3\n");
 	}
 	g_signal = _SIGOKAY;
 }
