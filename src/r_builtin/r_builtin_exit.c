@@ -6,7 +6,7 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 19:00:54 by wdavey            #+#    #+#             */
-/*   Updated: 2024/01/09 15:38:10 by wdavey           ###   ########.fr       */
+/*   Updated: 2024/01/09 15:41:18 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,11 @@ int	builtin_exit(t_command cmd)
 		write(cmd.fd[FD_OUT], NONNUMERR_START, ft_strlen(NONNUMERR_START));
 		write(cmd.fd[FD_OUT], cmd.argv[1], ft_strlen(cmd.argv[1]));
 		write(cmd.fd[FD_OUT], NONNUMERR_END, ft_strlen(NONNUMERR_END));
+		return (255);
 	}
 	else
 	{
 		write(cmd.fd[FD_OUT], "exit: too many arguments\n", 25);
+		return (1);
 	}
-	return (0);
 }
