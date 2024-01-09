@@ -32,6 +32,7 @@ FILES:=\
 	str/str\
 	utils/free_all\
 	utils/ft_realloc\
+	utils/isspace\
 	array_append\
 	array_last\
 	command\

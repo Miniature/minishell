@@ -6,7 +6,7 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 09:33:09 by wdavey            #+#    #+#             */
-/*   Updated: 2024/01/09 15:39:06 by wdavey           ###   ########.fr       */
+/*   Updated: 2024/01/09 15:58:17 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ static char	*get_input(void)
 	t.c_lflag = t.c_lflag & ~ECHOCTL;
 	tcsetattr(0, TCSANOW, &t);
 	input = ft_strdup("");
-	while (input != NULL && ft_strlen(input) == 0)
+	while (input != NULL && (ft_strlen(input) == 0
+			|| str_has_all(input, ms_isspace)))
 	{
 		input = readline("minishell> ");
 	}
