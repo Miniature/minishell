@@ -67,16 +67,16 @@ static void	engine_run(t_list *cmds, char ***envp)
 	free(rvalstr);
 }
 
-static void	engine_cleanup(char *input, char **tokens, t_list *cmds)
+static void	engine_cleanup(char *input, char **tokens, t_list *cmds,
+	char ***envp)
+{
+	if (input != NULL)
 {
 	free(input);
 	free_all(tokens);
 	ft_lstclear(&cmds, (void (*)(void *)) & command_free);
 }
-
-static void	engine_signals(char ***envp)
-{
-	if (g_signal == _SIGEXIT)
+	if (envp != NULL && g_signal == _SIGEXIT)
 	{
 		printf("Quit: %s\n", ms_getenv_value(envp, "?"));
 	}
@@ -100,8 +100,7 @@ int	engine(char ***envp)
 			&& !ft_strncmp(((t_command *)cmds->content)->argv[0], "exit", -1))
 			break ;
 		engine_run(cmds, envp);
-		engine_cleanup(input, tokens, cmds);
-		engine_signals(envp);
+		engine_cleanup(input, tokens, cmds, envp);
 	}
-	engine_cleanup(input, tokens, cmds);
+	engine_cleanup(input, tokens, cmds, NULL);
 }
