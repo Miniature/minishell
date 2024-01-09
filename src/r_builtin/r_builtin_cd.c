@@ -6,7 +6,7 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 18:37:29 by wdavey            #+#    #+#             */
-/*   Updated: 2024/01/09 16:22:51 by wdavey           ###   ########.fr       */
+/*   Updated: 2024/01/09 16:26:06 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@
 
 #define NOHOME "minishell: HOME is not set\n"
 #define NOOLDPWD "minishell: cd: OLDPWD not set\n"
+
+int	builtin_pwd(t_command cmd);
 
 static char	*cd_dir(t_command cmd)
 {
@@ -65,7 +67,7 @@ int	builtin_cd(t_command cmd)
 	}
 	if (print)
 	{
-		ft_putendl_fd(path, cmd.fd[FD_OUT]);
+		builtin_pwd(cmd);
 	}
 	ms_setenv(cmd.envp, ft_strjoin("OLDPWD=", oldpath));
 	free(oldpath);
