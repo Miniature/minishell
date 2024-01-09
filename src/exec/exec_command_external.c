@@ -6,7 +6,7 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 14:41:36 by wdavey            #+#    #+#             */
-/*   Updated: 2023/12/19 10:29:55 by wdavey           ###   ########.fr       */
+/*   Updated: 2024/01/09 16:44:23 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,9 @@ static void	exec_command_external_fork(char *cmd_path, t_command cmd)
 	exit(1);
 }
 
+#define NOTFOUND_START "minishell: "
+#define NOTFOUND_END ": command not found\n"
+
 int	exec_command_external(t_command cmd)
 {
 	char	*cmd_path;
@@ -43,11 +46,11 @@ int	exec_command_external(t_command cmd)
 
 	ms_setenv(cmd.envp, ft_strjoin("_=", cmd.argv[0]));
 	cmd_path = resolve_path(cmd);
-	if (cmd_path == NULL)
+	if (cmd_path == NULL || ft_strlen(cmd.argv[0]) == 0)
 	{
-		write(2, "minishell: command not found: ", 31);
+		write(2, NOTFOUND_START, ft_strlen(NOTFOUND_START));
 		write(2, cmd.argv[0], ft_strlen(cmd.argv[0]));
-		write(2, "\n", 1);
+		write(2, NOTFOUND_END, ft_strlen(NOTFOUND_END));
 		return (-1);
 	}
 	pid = fork();
