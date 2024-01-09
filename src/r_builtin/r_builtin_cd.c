@@ -6,7 +6,7 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 18:37:29 by wdavey            #+#    #+#             */
-/*   Updated: 2024/01/08 14:49:34 by wdavey           ###   ########.fr       */
+/*   Updated: 2024/01/09 16:22:51 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,33 +19,55 @@
 #include <stdlib.h>
 
 #define NOHOME "minishell: HOME is not set\n"
+#define NOOLDPWD "minishell: cd: OLDPWD not set\n"
 
-int	builtin_cd(t_command cmd)
+static char	*cd_dir(t_command cmd)
 {
 	char	*path;
-	char	*oldpath;
 
 	path = cmd.argv[1];
-	oldpath = getcwd(NULL, 0);
 	if (path == NULL)
 	{
 		path = ms_getenv_value(cmd.envp, "HOME");
 		if (path == NULL)
 		{
-			free(oldpath);
 			write(STDERR_FILENO, NOHOME, ft_strlen(NOHOME));
+			return (NULL);
 		}
 	}
 	else if (!ft_strncmp(path, "-", -1))
+	{
 		path = ms_getenv_value(cmd.envp, "OLDPWD");
+		if (path == NULL)
+		{
+			write(STDERR_FILENO, NOOLDPWD, ft_strlen(NOOLDPWD));
+			return (NULL);
+		}
+	}
+	return (path);
+}
+
+int	builtin_cd(t_command cmd)
+{
+	char	*path;
+	char	*oldpath;
+	bool	print;
+
+	path = cd_dir(cmd);
+	if (path == NULL)
+		return (1);
+	print = !(cmd.argv[1] != NULL && ft_strcmp(cmd.argv[1], "-"));
+	oldpath = getcwd(NULL, 0);
 	if (chdir(path) != 0)
 	{
 		perror("cd");
 		return (1);
 	}
+	if (print)
+	{
+		ft_putendl_fd(path, cmd.fd[FD_OUT]);
+	}
 	ms_setenv(cmd.envp, ft_strjoin("OLDPWD=", oldpath));
 	free(oldpath);
 	return (0);
 }
-
-//		printf("%s\n", path); << Add to line 34 if needed there >>
