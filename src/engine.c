@@ -22,13 +22,21 @@
 #include "readline/readline.h"
 #include "readline/history.h"
 #include "r_signal.h"
+#include <termios.h>
 
 static char	*get_input(void)
 {
-	char	*input;
+	char			*input;
+	struct termios	t;
 
+	tcgetattr(0, &t);
+	t.c_lflag = t.c_lflag & ~ECHOCTL;
+	tcsetattr(0, TCSANOW, &t);
 	input = readline("minishell> ");
 	add_history(input);
+	tcgetattr(0, &t);
+	t.c_lflag = t.c_lflag | ECHOCTL;
+	tcsetattr(0, TCSANOW, &t);
 	return (input);
 }
 
