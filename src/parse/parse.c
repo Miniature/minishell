@@ -6,7 +6,7 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 14:09:47 by wdavey            #+#    #+#             */
-/*   Updated: 2023/12/18 07:39:44 by wdavey           ###   ########.fr       */
+/*   Updated: 2024/01/09 16:47:23 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,8 @@ t_list	*build_commands(char **tokens, char ***envp)
 	commands = NULL;
 	iii = -1;
 	current = command_new(envp);
+	if (tokens[0] == NULL)
+		array_append(&(current->argv), ft_strdup(""));
 	while (tokens[++iii])
 	{
 		if (0 == ft_strncmp(tokens[iii], "|", -1))
