@@ -6,7 +6,7 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 16:47:41 by wdavey            #+#    #+#             */
-/*   Updated: 2024/01/08 15:19:32 by wdavey           ###   ########.fr       */
+/*   Updated: 2024/01/09 16:09:24 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static size_t	single_quote(char *str, t_string *current)
 {
 	if (ft_strchr(str + 1, '\''))
 		*ft_strchr(str + 1, '\'') = '\0';
-	string_addcstr(current, str);
+	string_addcstr(current, str + 1);
 	return (ft_strlen(str));
 }
 
