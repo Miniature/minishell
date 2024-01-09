@@ -6,7 +6,7 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 09:33:09 by wdavey            #+#    #+#             */
-/*   Updated: 2024/01/08 15:43:22 by wdavey           ###   ########.fr       */
+/*   Updated: 2024/01/09 15:28:49 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 #include "readline/history.h"
 #include "r_signal.h"
 #include <termios.h>
+#include <unistd.h>
 
 static char	*get_input(void)
 {
@@ -32,8 +33,11 @@ static char	*get_input(void)
 	tcgetattr(0, &t);
 	t.c_lflag = t.c_lflag & ~ECHOCTL;
 	tcsetattr(0, TCSANOW, &t);
+	input = ft_strdup("");
+	while (input != NULL && ft_strlen(input) == 0)
+	{
 	input = readline("minishell> ");
-	add_history(input);
+	}
 	tcgetattr(0, &t);
 	t.c_lflag = t.c_lflag | ECHOCTL;
 	tcsetattr(0, TCSANOW, &t);
@@ -91,9 +95,13 @@ int	engine(char ***envp)
 
 	while (true)
 	{
-		input = NULL;
-		while (!input || !ft_strlen(input))
+		signal(SIGQUIT, SIG_IGN);
 			input = get_input();
+		if (input == NULL || g_signal == _SIGEXIT)
+			break ;
+		add_history(input);
+		g_signal = _SIGOKAY;
+		signal(SIGQUIT, &signal_handler);
 		tokens = tokenize_input(input, envp);
 		cmds = build_commands(tokens, envp);
 		if (cmds && !cmds->next
