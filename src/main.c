@@ -6,7 +6,7 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 18:10:56 by wdavey            #+#    #+#             */
-/*   Updated: 2024/01/08 15:35:27 by wdavey           ###   ########.fr       */
+/*   Updated: 2024/01/09 15:23:06 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 #include "readline/readline.h"
 #include "readline/history.h"
 
-void	engine(char ***envp);
+int	engine(char ***envp);
 
 //envp gets edited, so it needs to not be in static memory
 static char	**copy_envp(char **envp)

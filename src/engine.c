@@ -83,7 +83,7 @@ static void	engine_signals(char ***envp)
 	g_signal = _SIGOKAY;
 }
 
-void	engine(char ***envp)
+int	engine(char ***envp)
 {
 	char			*input;
 	char			**tokens;
