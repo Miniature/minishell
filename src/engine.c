@@ -6,7 +6,7 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 09:33:09 by wdavey            #+#    #+#             */
-/*   Updated: 2024/01/09 15:28:49 by wdavey           ###   ########.fr       */
+/*   Updated: 2024/01/09 15:30:56 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static char	*get_input(void)
 	input = ft_strdup("");
 	while (input != NULL && ft_strlen(input) == 0)
 	{
-	input = readline("minishell> ");
+		input = readline("minishell> ");
 	}
 	tcgetattr(0, &t);
 	t.c_lflag = t.c_lflag | ECHOCTL;
@@ -75,11 +75,11 @@ static void	engine_cleanup(char *input, char **tokens, t_list *cmds,
 	char ***envp)
 {
 	if (input != NULL)
-{
-	free(input);
-	free_all(tokens);
-	ft_lstclear(&cmds, (void (*)(void *)) & command_free);
-}
+	{
+		free(input);
+		free_all(tokens);
+		ft_lstclear(&cmds, (void (*)(void *)) & command_free);
+	}
 	if (envp != NULL && g_signal == _SIGEXIT)
 	{
 		printf("Quit: %s\n", ms_getenv_value(envp, "?"));
@@ -87,16 +87,33 @@ static void	engine_cleanup(char *input, char **tokens, t_list *cmds,
 	g_signal = _SIGOKAY;
 }
 
+static bool	engine_isexit(t_command *cmd, int *rval_loc)
+{
+	if (!ft_strncmp(cmd->argv[0], "exit", -1))
+	{
+		if (cmd->argv[1] == NULL)
+			return (true);
+		if (cmd->argv[2] == NULL)
+		{
+			*rval_loc = ft_atoi(cmd->argv[1]);
+			return (true);
+		}
+	}
+	return (false);
+}
+
 int	engine(char ***envp)
 {
 	char			*input;
 	char			**tokens;
 	t_list			*cmds;
+	int				rval;
 
+	rval = 0;
 	while (true)
 	{
 		signal(SIGQUIT, SIG_IGN);
-			input = get_input();
+		input = get_input();
 		if (input == NULL || g_signal == _SIGEXIT)
 			break ;
 		add_history(input);
@@ -105,10 +122,11 @@ int	engine(char ***envp)
 		tokens = tokenize_input(input, envp);
 		cmds = build_commands(tokens, envp);
 		if (cmds && !cmds->next
-			&& !ft_strncmp(((t_command *)cmds->content)->argv[0], "exit", -1))
+			&& engine_isexit((t_command *)cmds->content, &rval))
 			break ;
 		engine_run(cmds, envp);
 		engine_cleanup(input, tokens, cmds, envp);
 	}
 	engine_cleanup(input, tokens, cmds, NULL);
+	return (rval);
 }

@@ -6,7 +6,7 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 18:10:56 by wdavey            #+#    #+#             */
-/*   Updated: 2024/01/09 15:23:06 by wdavey           ###   ########.fr       */
+/*   Updated: 2024/01/09 15:31:15 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ int	main(int argc, char **argv, char **envp)
 {
 	char	*shlvl;
 	char	**env;
+	int		rval;
 
 	(void)argc;
 	(void)argv;
@@ -65,9 +66,9 @@ int	main(int argc, char **argv, char **envp)
 	}
 	signal(SIGINT, signal_handler);
 	signal(SIGQUIT, signal_handler);
-	engine(&env);
+	rval = engine(&env);
 	free_all(env);
 	rl_clear_history();
 	printf("exit\n");
-	return (0);
+	return (rval);
 }
