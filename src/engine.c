@@ -6,7 +6,7 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 09:33:09 by wdavey            #+#    #+#             */
-/*   Updated: 2024/01/09 15:30:56 by wdavey           ###   ########.fr       */
+/*   Updated: 2024/01/09 15:39:06 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,9 @@ static bool	engine_isexit(t_command *cmd, int *rval_loc)
 	{
 		if (cmd->argv[1] == NULL)
 			return (true);
-		if (cmd->argv[2] == NULL)
+		if (cmd->argv[2] == NULL
+			&& str_has_all(cmd->argv[1], (bool (*)(char))&ft_isalnum)
+			&& !str_has_any(cmd->argv[1], (bool (*)(char))&ft_isalpha))
 		{
 			*rval_loc = ft_atoi(cmd->argv[1]);
 			return (true);
