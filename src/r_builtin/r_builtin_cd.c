@@ -6,7 +6,7 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 18:37:29 by wdavey            #+#    #+#             */
-/*   Updated: 2024/01/09 16:26:06 by wdavey           ###   ########.fr       */
+/*   Updated: 2024/01/10 22:49:42 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int	builtin_cd(t_command cmd)
 	path = cd_dir(cmd);
 	if (path == NULL)
 		return (1);
-	print = !(cmd.argv[1] != NULL && ft_strcmp(cmd.argv[1], "-"));
+	print = cmd.argv[1] != NULL && !ft_strcmp(cmd.argv[1], "-");
 	oldpath = getcwd(NULL, 0);
 	if (chdir(path) != 0)
 	{
