@@ -6,7 +6,7 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 23:18:29 by wdavey            #+#    #+#             */
-/*   Updated: 2024/01/10 23:19:14 by wdavey           ###   ########.fr       */
+/*   Updated: 2024/01/10 23:45:08 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,7 @@ char	*get_input(void)
 	{
 		if (input)
 			free(input);
-		if (g_signal != _SIGOKAY)
-		{
-			g_signal = _SIGOKAY;
-			input = readline("");
-		}
-		else
-			input = readline("minishell> ");
+		input = readline("minishell> ");
 	}
 	tcgetattr(0, &t);
 	t.c_lflag = t.c_lflag | ECHOCTL;
