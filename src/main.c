@@ -45,25 +45,33 @@ static char	**copy_envp(char **envp)
 	return (copy);
 }
 
-int	main(int argc, char **argv, char **envp)
+void	default_envp(char ***envp)
 {
 	char	*shlvl;
+
+	if (ms_getenv(envp, "PATH") == NULL)
+		ms_setenv(envp, ft_strdup(DEFAULT_PATH));
+	shlvl = ms_getenv(envp, "SHLVL");
+	if (shlvl == NULL)
+		ms_setenv(envp, ft_strdup("SHLVL=1"));
+	else
+	{
+		shlvl = ft_itoa(ft_atoi(ft_strchr(shlvl, '=') + 1) + 1);
+		ms_setenv(envp, string_addcstr(&(t_string){ft_strdup("SHLVL="), 7},
+				shlvl)->cstr);
+		free(shlvl);
+	}
+}
+
+int	main(int argc, char **argv, char **envp)
+{
 	char	**env;
 	int		rval;
 
 	(void)argc;
 	(void)argv;
 	env = copy_envp(envp);
-	shlvl = ms_getenv(&env, "SHLVL");
-	if (shlvl == NULL)
-		ms_setenv(&env, "SHLVL=1");
-	else
-	{
-		shlvl = ft_itoa(ft_atoi(ft_strchr(shlvl, '=') + 1) + 1);
-		ms_setenv(&env, string_addcstr(&(t_string){ft_strdup("SHLVL="), 7},
-				shlvl)->cstr);
-		free(shlvl);
-	}
+	default_envp(&env);
 	signal(SIGINT, signal_handler);
 	signal(SIGQUIT, signal_handler);
 	rval = engine(&env);
