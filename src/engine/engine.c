@@ -6,7 +6,7 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 09:33:09 by wdavey            #+#    #+#             */
-/*   Updated: 2024/01/10 23:37:34 by wdavey           ###   ########.fr       */
+/*   Updated: 2024/01/10 23:56:49 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,8 @@ static void	engine_cleanup(char *input, char **tokens, t_list *cmds,
 	{
 		printf("Quit: 3\n");
 	}
+	if (g_signal == _SIGINTERUPT)
+		printf("\n");
 	g_signal = _SIGOKAY;
 }
 
@@ -91,8 +93,6 @@ char	*engine_input(void)
 {
 	char	*input;
 
-	if (g_signal == _SIGINTERUPT || true)
-		printf("\n");
 	signal(SIGQUIT, SIG_IGN);
 	signal(SIGINT, &signal_handler);
 	input = get_input();
