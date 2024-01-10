@@ -54,7 +54,7 @@ void	ms_unsetenv(char ***envp, char *name)
 	name_length = ft_strlen(name);
 	env = *envp;
 	i = find_and_remove(env, name, name_length);
-	new_env = realloc(env, i * sizeof(char *));
+	new_env = realloc(env, (i + 1) * sizeof(char *));
 	if (new_env == NULL)
 	{
 		write(STDERR_FILENO, "Failed to reallocate memory ", 28);
@@ -80,6 +80,7 @@ int	find_and_remove(char **env, char *name, int name_length)
 				env[i] = env[i + 1];
 				i++;
 			}
+			env[i] = NULL;
 			break ;
 		}
 	}

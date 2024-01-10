@@ -17,6 +17,8 @@
 #include "command.h"
 #include "libft.h"
 
+#include <stdlib.h>
+
 int	builtin_echo(t_command cmd)
 {
 	int		i;
@@ -25,12 +27,12 @@ int	builtin_echo(t_command cmd)
 
 	n = true;
 	i = 1;
-	if (!ft_strcmp(cmd.argv[1], "-n"))
+	args = cmd.argv;
+	if (args[1] && !ft_strcmp(args[1], "-n"))
 	{
 		n = false;
 		i++;
 	}
-	args = cmd.argv;
 	while (args[i])
 	{
 		write(cmd.fd[FD_OUT], args[i], ft_strlen(args[i]));
