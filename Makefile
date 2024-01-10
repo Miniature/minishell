@@ -14,6 +14,7 @@ FILES:=\
 	exec/exec_command\
 	exec/exec_command_builtin\
 	exec/exec_command_external\
+	exec/resolve_path\
 	parse/parse_utils\
 	parse/parse\
 	parse/tokenize\
@@ -33,12 +34,11 @@ FILES:=\
 	utils/free_all\
 	utils/ft_realloc\
 	utils/isspace\
-	array_append\
-	array_last\
-	command\
+	utils/array_append\
+	utils/array_last\
+	utils/command\
 	engine\
 	main\
-	resolve_path\
 
 BONUS:=\
 
