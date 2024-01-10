@@ -121,7 +121,7 @@ char	**tokenize_input(char *str, char ***envp)
 	{
 		if (str[iii] == '\'')
 			iii += single_quote(str + iii, &arg);
-		else if (str[iii] == '$')
+		else if (str[iii] == '$' && str[iii + 1] != 0)
 			iii += insert_env(str + iii + 1, envp, &arg);
 		else if ('~' == str[iii] && (0 == iii || ' ' == str[iii - 1]))
 			iii += home(str + iii, &arg, envp);
