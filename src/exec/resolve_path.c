@@ -6,7 +6,7 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 15:04:05 by wdavey            #+#    #+#             */
-/*   Updated: 2023/11/28 16:25:03 by wdavey           ###   ########.fr       */
+/*   Updated: 2024/01/10 22:58:18 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static char	*get_path_env(t_command cmd)
 		}
 		env++;
 	}
-	return (DEFAULT_PATH);
+	return (":");
 }
 
 static char	*find_in_env(t_command cmd)
