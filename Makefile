@@ -9,6 +9,8 @@ export CFLAGS
 NAME:=minishell
 
 FILES:=\
+	engine/engine\
+	engine/get_input\
 	env/env_get\
 	env/env\
 	exec/exec_command\
@@ -37,7 +39,6 @@ FILES:=\
 	utils/array_append\
 	utils/array_last\
 	utils/command\
-	engine\
 	main\
 
 BONUS:=\

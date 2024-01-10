@@ -6,7 +6,7 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 09:33:09 by wdavey            #+#    #+#             */
-/*   Updated: 2024/01/09 16:32:33 by wdavey           ###   ########.fr       */
+/*   Updated: 2024/01/10 23:37:34 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,27 +25,7 @@
 #include <termios.h>
 #include <unistd.h>
 
-static char	*get_input(void)
-{
-	char			*input;
-	struct termios	t;
-
-	tcgetattr(0, &t);
-	t.c_lflag = t.c_lflag & ~ECHOCTL;
-	tcsetattr(0, TCSANOW, &t);
-	input = ft_strdup("");
-	while (input != NULL && (ft_strlen(input) == 0
-			|| str_has_all(input, ms_isspace)))
-	{
-		if (input)
-			free(input);
-		input = readline("minishell> ");
-	}
-	tcgetattr(0, &t);
-	t.c_lflag = t.c_lflag | ECHOCTL;
-	tcsetattr(0, TCSANOW, &t);
-	return (input);
-}
+char	*get_input(void);
 
 static void	engine_run(t_list *cmds, char ***envp)
 {
@@ -107,6 +87,24 @@ static bool	engine_isexit(t_command *cmd, int *rval_loc)
 	return (false);
 }
 
+char	*engine_input(void)
+{
+	char	*input;
+
+	if (g_signal == _SIGINTERUPT || true)
+		printf("\n");
+	signal(SIGQUIT, SIG_IGN);
+	signal(SIGINT, &signal_handler);
+	input = get_input();
+	if (input == NULL || g_signal == _SIGEXIT)
+		return (NULL);
+	add_history(input);
+	g_signal = _SIGOKAY;
+	signal(SIGQUIT, &signal_handler);
+	signal(SIGINT, &ignore);
+	return (input);
+}
+
 int	engine(char ***envp)
 {
 	char			*input;
@@ -117,13 +115,9 @@ int	engine(char ***envp)
 	rval = 0;
 	while (true)
 	{
-		signal(SIGQUIT, SIG_IGN);
-		input = get_input();
-		if (input == NULL || g_signal == _SIGEXIT)
+		input = engine_input();
+		if (input == NULL)
 			break ;
-		add_history(input);
-		g_signal = _SIGOKAY;
-		signal(SIGQUIT, &signal_handler);
 		tokens = tokenize_input(input, envp);
 		cmds = build_commands(tokens, envp);
 		if (cmds && !cmds->next
