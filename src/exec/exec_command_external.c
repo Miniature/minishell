@@ -6,7 +6,7 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 14:41:36 by wdavey            #+#    #+#             */
-/*   Updated: 2024/01/09 16:44:23 by wdavey           ###   ########.fr       */
+/*   Updated: 2024/01/10 21:31:24 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ int	exec_command_external(t_command cmd)
 		write(2, NOTFOUND_START, ft_strlen(NOTFOUND_START));
 		write(2, cmd.argv[0], ft_strlen(cmd.argv[0]));
 		write(2, NOTFOUND_END, ft_strlen(NOTFOUND_END));
+		free(cmd_path);
 		return (-1);
 	}
 	pid = fork();
