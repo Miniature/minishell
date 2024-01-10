@@ -55,7 +55,7 @@ int	main(int argc, char **argv, char **envp)
 	(void)argv;
 	env = copy_envp(envp);
 	shlvl = ms_getenv(&env, "SHLVL");
-	if (NULL == shlvl)
+	if (shlvl == NULL)
 		ms_setenv(&env, "SHLVL=1");
 	else
 	{
