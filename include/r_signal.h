@@ -6,7 +6,7 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 16:48:52 by wdavey            #+#    #+#             */
-/*   Updated: 2024/01/08 14:53:59 by wdavey           ###   ########.fr       */
+/*   Updated: 2024/01/10 23:31:10 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,5 +40,6 @@ typedef struct s_signal
 
 void	signal_init(void);
 void	signal_handler(int input_code);
+void	ignore(int a);
 
 #endif
