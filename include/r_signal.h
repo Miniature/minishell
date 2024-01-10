@@ -31,13 +31,6 @@ typedef enum e_signalStatus
 	_SIGEOF
 }	t_signalStatus;
 
-typedef struct s_signal
-{
-	t_signalStatus			signal;
-	pid_t					pid;
-	int						exit_code;
-}	t_signal;
-
 void	signal_init(void);
 void	signal_handler(int input_code);
 

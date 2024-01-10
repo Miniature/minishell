@@ -36,6 +36,7 @@ void	signal_handler(int input_code)
 	if (input_code == SIGINT)
 	{
 		write(STDOUT_FILENO, "\n", 1);
+		rl_point = 0;
 		rl_replace_line("", 0);
 		rl_on_new_line();
 		rl_redisplay();
