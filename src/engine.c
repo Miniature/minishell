@@ -37,6 +37,8 @@ static char	*get_input(void)
 	while (input != NULL && (ft_strlen(input) == 0
 			|| str_has_all(input, ms_isspace)))
 	{
+		if (input)
+			free(input);
 		input = readline("minishell> ");
 	}
 	tcgetattr(0, &t);
