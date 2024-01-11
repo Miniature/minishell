@@ -62,10 +62,10 @@ DYLIBPATHS=$(addsuffix .dylib, $(join $(addprefix lib/, $(DYLIBS)), $(addprefix 
 
 .PHONY: all clean fclean re bonus debug
 
+all: $(NAME)
+
 debug: CFLAGS+=-g
 debug: bonus all
-
-all: $(NAME)
 
 bonus: OBJ_FILES=$(OBJ_FILES_BONUS)
 bonus: all
