@@ -6,7 +6,7 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 18:37:29 by wdavey            #+#    #+#             */
-/*   Updated: 2024/01/10 22:49:42 by wdavey           ###   ########.fr       */
+/*   Updated: 2024/01/11 14:31:37 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,15 @@ static char	*cd_dir(t_command cmd)
 	return (path);
 }
 
+static void	builtin_cd_error(char *path)
+{
+	char	*msg;
+
+	msg = ft_strjoin("minishell: cd: ", path);
+	perror(msg);
+	free(msg);
+}
+
 int	builtin_cd(t_command cmd)
 {
 	char	*path;
@@ -62,7 +71,8 @@ int	builtin_cd(t_command cmd)
 	oldpath = getcwd(NULL, 0);
 	if (chdir(path) != 0)
 	{
-		perror("cd");
+		builtin_cd_error(path);
+		free(oldpath);
 		return (1);
 	}
 	if (print)
