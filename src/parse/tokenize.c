@@ -6,7 +6,7 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 16:47:41 by wdavey            #+#    #+#             */
-/*   Updated: 2024/01/11 14:10:27 by wdavey           ###   ########.fr       */
+/*   Updated: 2024/01/11 14:32:05 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ static size_t	home(char *str, t_string *current, char ***envp)
 {
 	char	*value;
 
+	(void)str;
 	value = ms_getenv_value(envp, "HOME");
 	if (NULL == value)
 	{
