@@ -6,7 +6,7 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 16:47:41 by wdavey            #+#    #+#             */
-/*   Updated: 2024/01/11 00:02:09 by wdavey           ###   ########.fr       */
+/*   Updated: 2024/01/11 13:57:12 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static size_t	insert_env(char *str, char ***envp, t_string *current)
 			string_addcstr(current, "0");
 		return (1);
 	}
-	if (ms_isspace(*str))
+	if (*str == '\0' || ms_isspace(*str))
 		return (string_addcstr(current, "$"), 0);
 	name = (t_string){ft_strdup(""), 1};
 	while (ft_isalnum(str[ft_strlen(name.cstr)]))
@@ -121,7 +121,7 @@ char	**tokenize_input(char *str, char ***envp)
 	{
 		if (str[iii] == '\'')
 			iii += single_quote(str + iii, &arg);
-		else if (str[iii] == '$' && str[iii + 1] != 0)
+		else if (str[iii] == '$')
 			iii += insert_env(str + iii + 1, envp, &arg);
 		else if ('~' == str[iii] && (0 == iii || ' ' == str[iii - 1]))
 			iii += home(str + iii, &arg, envp);
