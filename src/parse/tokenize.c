@@ -6,7 +6,7 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 16:47:41 by wdavey            #+#    #+#             */
-/*   Updated: 2024/01/11 13:57:12 by wdavey           ###   ########.fr       */
+/*   Updated: 2024/01/11 14:10:27 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,21 +90,14 @@ static size_t	home(char *str, t_string *current, char ***envp)
 {
 	char	*value;
 
-	if ('\0' != str[1] && ' ' != str[1])
+	value = ms_getenv_value(envp, "HOME");
+	if (NULL == value)
 	{
+		write(STDERR_FILENO, NOHOME, ft_strlen(NOHOME));
 		string_addchar(current, '~');
 	}
 	else
-	{
-		value = ms_getenv_value(envp, "HOME");
-		if (NULL == value)
-		{
-			write(STDERR_FILENO, NOHOME, ft_strlen(NOHOME));
-			string_addchar(current, '~');
-		}
-		else
-			string_addcstr(current, value);
-	}
+		string_addcstr(current, value);
 	return (0);
 }
 
