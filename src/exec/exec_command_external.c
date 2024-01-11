@@ -6,7 +6,7 @@
 /*   By: wdavey <wdavey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 14:41:36 by wdavey            #+#    #+#             */
-/*   Updated: 2024/01/10 21:31:24 by wdavey           ###   ########.fr       */
+/*   Updated: 2024/01/11 14:06:39 by wdavey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,8 @@ int	exec_command_external(t_command cmd)
 		write(2, NOTFOUND_START, ft_strlen(NOTFOUND_START));
 		write(2, cmd.argv[0], ft_strlen(cmd.argv[0]));
 		write(2, NOTFOUND_END, ft_strlen(NOTFOUND_END));
-		free(cmd_path);
+		if (cmd_path != NULL)
+			free(cmd_path);
 		return (-1);
 	}
 	pid = fork();
@@ -61,6 +62,7 @@ int	exec_command_external(t_command cmd)
 	{
 		exec_command_external_fork(cmd_path, cmd);
 	}
+	free(cmd_path);
 	ms_setenv(cmd.envp, ft_strjoin("_=", array_last((void **)cmd.argv)));
 	return (pid);
 }
